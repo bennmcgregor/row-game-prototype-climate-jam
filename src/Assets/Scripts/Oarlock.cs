@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Oarlock : MonoBehaviour
 {
+    // pivots the oarlock (and attached oar) when the oar state has changed
+    // to place the oar in the water or release it from the water
     public float DroppedZAxisRotation = -7.5f;
     public float LiftedZAxisRotation = 0f; 
     public bool IsPort = false;
@@ -18,12 +20,12 @@ public class Oarlock : MonoBehaviour
         if (IsPort)
         {
             InputListener.OnPortOarStateChange += OnStateChange;
-            _state = InputListener.PortOarState;
+            OnStateChange(InputListener.PortOarState);
         }
         else
         {
             InputListener.OnStarboardOarStateChange += OnStateChange;
-            _state = InputListener.StarboardOarState;
+            OnStateChange(InputListener.StarboardOarState);
         }
 
         _prevConnectorRotation = Connector.eulerAngles;

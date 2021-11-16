@@ -11,7 +11,8 @@
                     "id": "65863f7e-8a33-4aed-9c30-fed2777106f9",
                     "expectedControlType": "Stick",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "PortOar",
@@ -19,7 +20,8 @@
                     "id": "787c145c-ab2d-4c4f-bcff-6dc39cf6fe7d",
                     "expectedControlType": "Stick",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "GrabOars",
@@ -27,7 +29,8 @@
                     "id": "02006ea7-687e-47d1-b007-f2c5189ad200",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LiftPortOar",
@@ -35,7 +38,8 @@
                     "id": "b7168b8d-3db2-46e8-ab0f-25c57224c425",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "LiftStarboardOar",
@@ -43,7 +47,35 @@
                     "id": "048f8ad9-4dac-4891-8b22-ad5f9922e9ce",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PrimaryContact",
+                    "type": "PassThrough",
+                    "id": "9d455996-3258-40fa-9524-e2c3a4215cb5",
+                    "expectedControlType": "Touch",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PrimaryPosition",
+                    "type": "Value",
+                    "id": "184c34e7-7edc-462f-899a-74a90114609b",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "SecondaryPosition",
+                    "type": "Value",
+                    "id": "06db094e-77ae-4323-9813-b0c18d646b6d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -198,6 +230,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "LiftStarboardOar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ea355500-0466-4655-ad43-f0c14cd3b6ce",
+                    "path": "<Touchscreen>/touch0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e804a4c6-efa6-4482-94d7-28cd23681643",
+                    "path": "<Touchscreen>/touch0/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PrimaryPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "054121d7-dca9-4cf7-9105-4daa250d7049",
+                    "path": "<Touchscreen>/touch1/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondaryPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

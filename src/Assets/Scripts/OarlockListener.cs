@@ -3,6 +3,13 @@ using UnityEngine;
 
 public class OarlockListener : MonoBehaviour
 {
+	// this class keeps track of the pull state of each oar (can it be pulled or not) and
+	// and the component of the force on the oar in the direction of the boat
+
+	// TEMP actions
+	public Action<PullState> OnPortPullStateChanged;
+	public Action<PullState> OnStarboardPullStateChanged;
+
 	public HingeJoint PortOarlock;
 	public HingeJoint StarboardOarlock;
 	public InputListener InputListener;
@@ -22,6 +29,10 @@ public class OarlockListener : MonoBehaviour
 	private Vector2 _starboardStick;
     private Vector2 _portStick;
 
+	// TEMP internal properties
+	private PullState _prevStarboardPullState;
+	private PullState _prevPortPullState;
+
 	private void Start()
 	{
 		InputListener.OnPortStickChange += stick => _portStick = stick;
@@ -30,9 +41,13 @@ public class OarlockListener : MonoBehaviour
 
     public void Update()
 	{
+		_prevPortPullState = _portPullState;
+		_prevStarboardPullState = _starboardPullState;
+
 		if (_portStick.y > 0 && PortOarlock.angle <= PortOarlock.limits.min + AngleDelta || // pushed all the way to the catch
 			_portStick.y < 0 && PortOarlock.angle >= PortOarlock.limits.max - AngleDelta) // or pulled all the way into the finish
 		{
+			
 			_portPullState = PullState.CannotPull;
 		}
 		else
@@ -50,10 +65,18 @@ public class OarlockListener : MonoBehaviour
 			_starboardPullState = PullState.CanPull;
 		}
 
+		if (_prevPortPullState != _portPullState) {
+			OnPortPullStateChanged?.Invoke(_portPullState);
+		}
+		if (_prevStarboardPullState != _starboardPullState) {
+			OnStarboardPullStateChanged?.Invoke(_starboardPullState);
+		}
+
 		_portEffortScalingFactor = CalculateScalingFactor(PortOarlock.angle);
 		_starboardEffortScalingFactor = CalculateScalingFactor(StarboardOarlock.angle);
 	}
 
+	// get the component of the force on the oars that is in the direction of the boat
 	private float CalculateScalingFactor(float angle)
 	{
 		double radians = Math.PI * angle / 180.0f;

@@ -8,6 +8,9 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(WaterFloat))]
 public class RowBoat : MonoBehaviour
 {
+    // apply force and drag to the boat depending on the input and state of the oars
+    // move the camera to follow the boat at all times
+
     //visible Properties
     public float RiggerLength = 0.8f;
     public float InboardLength = 0.88f; // spread / 2 + 8cm
@@ -20,10 +23,11 @@ public class RowBoat : MonoBehaviour
     public float AngularDragFactor = 15f;
     public float OarTranslationalZDragFactor = 3f;
     public float OarAngularDragFactor = 0.5f;
-    public Transform PortOar;
-    public Transform StarboardOar;
+    public float RushingForceMultiplier = 0.3f;
     public InputListener InputListener;
     public OarlockListener OarlockListener;
+    public Oar StarboardOar;
+    public Oar PortOar;
 
     //used Components
     protected Rigidbody Rigidbody;
@@ -36,7 +40,6 @@ public class RowBoat : MonoBehaviour
     private OarState _portState;
     private Vector2 _starboardStick;
     private Vector2 _portStick;
-    private Vector3 _xzVector = new Vector3(1, 0, 1);
 
     public void Awake()
     {
@@ -47,6 +50,9 @@ public class RowBoat : MonoBehaviour
         InputListener.OnPortStickChange += stick => _portStick = stick;
         InputListener.OnStarboardOarStateChange += state => _starboardState = state;
         InputListener.OnStarboardStickChange += stick => _starboardStick = stick;
+
+        _portState = InputListener.PortOarState;
+        _starboardState = InputListener.StarboardOarState;
     }
 
     public void FixedUpdate()
@@ -54,7 +60,7 @@ public class RowBoat : MonoBehaviour
         float translationalZDragFactor = TranslationalZDragFactor;
         float angularDragFactor = AngularDragFactor;
 
-        // TODO: add drag on boat due to drag on oars (when oars in the water)
+        // calculate drag on boat due to drag on oars when not pulling or when end of stroke reached
         if (_portState != OarState.OarOutOfWater && (!InputListener.IsRowingPort || OarlockListener.PortPullState == PullState.CannotPull))
         {
             translationalZDragFactor += OarTranslationalZDragFactor * OarlockListener.PortEffortScalingFactor;
@@ -67,6 +73,7 @@ public class RowBoat : MonoBehaviour
             angularDragFactor += OarAngularDragFactor * OarlockListener.StarboardEffortScalingFactor;
         }
         
+        // force and torque applied to boat when pulling on the oars
         if (_portState == OarState.OarInWater && OarlockListener.PortPullState == PullState.CanPull)
         {
             // linear scaling of force input
@@ -92,12 +99,28 @@ public class RowBoat : MonoBehaviour
             Rigidbody.AddForce(appliedForceOnBoat);
             Rigidbody.AddRelativeTorque(appliedTorqueOnBoat);
         }
+        
+        // force from rushing the slide
+        if ( PortOar.ShouldApplyRecoveryForce )
+        {
+            Vector3 appliedForceOnBoat = transform.forward * _portStick.y * RushingForceMultiplier;
+
+            // only add force, not torque, since it's caused by the rower rushing the slide
+            Rigidbody.AddForce(appliedForceOnBoat);
+        }
+
+        if ( StarboardOar.ShouldApplyRecoveryForce )
+        {
+            Vector3 appliedForceOnBoat = transform.forward * _starboardStick.y * RushingForceMultiplier;
+            Rigidbody.AddForce(appliedForceOnBoat);
+        }
 
         // TODO: update drag factors based on speed of boat relative to the water ie vel_net = vel_water - vel_boat
 
-        UnityEngine.Debug.Log("trans: " + translationalZDragFactor);
-        UnityEngine.Debug.Log("ang: " + angularDragFactor);
+        // UnityEngine.Debug.Log("trans: " + translationalZDragFactor);
+        // UnityEngine.Debug.Log("ang: " + angularDragFactor);
 
+        // apply the drag to the boat
         Rigidbody.velocity = Vector3.Scale(
             Rigidbody.velocity,
             new Vector3(
@@ -108,14 +131,6 @@ public class RowBoat : MonoBehaviour
         );
 
         Rigidbody.angularVelocity *= (1 - Time.deltaTime * angularDragFactor);
-
-        //moving forward
-        //var movingForward = Vector3.Cross(transform.forward, Rigidbody.velocity).y < 0;
-        
-        // TODO: calculate drag = DragConstant * velocity^2.
-
-        //move in direction
-        //Rigidbody.velocity = Quaternion.AngleAxis(Vector3.SignedAngle(Rigidbody.velocity, (movingForward ? 1f : 0f) * transform.forward, Vector3.up) * DragConstant, Vector3.up) * Rigidbody.velocity;
 
         //camera position
         Camera.transform.LookAt(transform.position - transform.forward * 6f + transform.up * 2f);
