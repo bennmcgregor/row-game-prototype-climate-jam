@@ -98,6 +98,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PlayerMotion"",
+                    ""type"": ""Value"",
+                    ""id"": ""2d8f0928-db5b-4271-af2c-594105bb3d53"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CameraMotion"",
+                    ""type"": ""Value"",
+                    ""id"": ""8fb7b240-c5ae-4b4e-a194-b7422c11701b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -287,6 +305,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""SecondaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bbe2e54d-98a4-49bf-8461-14bbcf0903b1"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b52f7d8b-78c8-4614-b039-84bd2335f5ab"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraMotion"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -303,6 +343,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Gameplay_PrimaryContact = m_Gameplay.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Gameplay_PrimaryPosition = m_Gameplay.FindAction("PrimaryPosition", throwIfNotFound: true);
         m_Gameplay_SecondaryPosition = m_Gameplay.FindAction("SecondaryPosition", throwIfNotFound: true);
+        m_Gameplay_PlayerMotion = m_Gameplay.FindAction("PlayerMotion", throwIfNotFound: true);
+        m_Gameplay_CameraMotion = m_Gameplay.FindAction("CameraMotion", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -370,6 +412,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_PrimaryContact;
     private readonly InputAction m_Gameplay_PrimaryPosition;
     private readonly InputAction m_Gameplay_SecondaryPosition;
+    private readonly InputAction m_Gameplay_PlayerMotion;
+    private readonly InputAction m_Gameplay_CameraMotion;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -382,6 +426,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @PrimaryContact => m_Wrapper.m_Gameplay_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Gameplay_PrimaryPosition;
         public InputAction @SecondaryPosition => m_Wrapper.m_Gameplay_SecondaryPosition;
+        public InputAction @PlayerMotion => m_Wrapper.m_Gameplay_PlayerMotion;
+        public InputAction @CameraMotion => m_Wrapper.m_Gameplay_CameraMotion;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -415,6 +461,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SecondaryPosition.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryPosition;
                 @SecondaryPosition.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryPosition;
                 @SecondaryPosition.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnSecondaryPosition;
+                @PlayerMotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMotion;
+                @PlayerMotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMotion;
+                @PlayerMotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPlayerMotion;
+                @CameraMotion.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraMotion;
+                @CameraMotion.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraMotion;
+                @CameraMotion.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraMotion;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -443,6 +495,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @SecondaryPosition.started += instance.OnSecondaryPosition;
                 @SecondaryPosition.performed += instance.OnSecondaryPosition;
                 @SecondaryPosition.canceled += instance.OnSecondaryPosition;
+                @PlayerMotion.started += instance.OnPlayerMotion;
+                @PlayerMotion.performed += instance.OnPlayerMotion;
+                @PlayerMotion.canceled += instance.OnPlayerMotion;
+                @CameraMotion.started += instance.OnCameraMotion;
+                @CameraMotion.performed += instance.OnCameraMotion;
+                @CameraMotion.canceled += instance.OnCameraMotion;
             }
         }
     }
@@ -457,5 +515,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
         void OnSecondaryPosition(InputAction.CallbackContext context);
+        void OnPlayerMotion(InputAction.CallbackContext context);
+        void OnCameraMotion(InputAction.CallbackContext context);
     }
 }
