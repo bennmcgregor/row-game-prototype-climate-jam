@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     public Transform ItemHoldingPosition;
     public Button DropItemButton;
-    public float ThrowPower = 500f; // power is scaled proportional to the mass of the object being thrown
+    public float ThrowPower = 200f; // power is scaled proportional to the mass of the object being thrown
 
     private Rigidbody _itemBeingHeld = null;
 
@@ -34,7 +34,8 @@ public class Inventory : MonoBehaviour
     private void DropItem()
     {
         _itemBeingHeld.transform.parent = null;
-        Vector3 throwForce = transform.forward * _itemBeingHeld.mass * ThrowPower;
+        Vector3 direction = Quaternion.Euler(360f - Camera.main.transform.eulerAngles.x, 0, 0) * transform.forward; 
+        Vector3 throwForce = direction * _itemBeingHeld.mass * ThrowPower;
         _itemBeingHeld.isKinematic = false;
         _itemBeingHeld.AddForce(throwForce);
         _itemBeingHeld = null;

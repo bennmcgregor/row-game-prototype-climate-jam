@@ -24,7 +24,6 @@ public class ProximitySensor : MonoBehaviour
         if (_prevWithinDistance != _withinDistance)
         {
             OnProximityChange?.Invoke(_withinDistance);
-            UnityEngine.Debug.Log(_withinDistance);
         }
     }
 

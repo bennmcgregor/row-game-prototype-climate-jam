@@ -32,7 +32,7 @@ public class RowingInputListenerTwoFingers : RowingInputListener
         {
             vel.y = Sigmoid(vel.y);
         }
-        UnityEngine.Debug.Log(vel);
+        // UnityEngine.Debug.Log(vel);
         return vel;
     }
 
@@ -97,7 +97,7 @@ public class RowingInputListenerTwoFingers : RowingInputListener
 
     private void PlaceOars()
     {
-        UnityEngine.Debug.Log("place oars");
+        // UnityEngine.Debug.Log("place oars");
 
         _portOarState = OarState.OarInWater;
         _starboardOarState = OarState.OarInWater;
@@ -108,7 +108,7 @@ public class RowingInputListenerTwoFingers : RowingInputListener
 
     private void LiftOars()
     {
-        UnityEngine.Debug.Log("lift oars");
+        // UnityEngine.Debug.Log("lift oars");
 
         _portOarState = OarState.OarOutOfWater;
         _starboardOarState = OarState.OarOutOfWater;

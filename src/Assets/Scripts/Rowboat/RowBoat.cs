@@ -13,18 +13,7 @@ public class RowBoat : MonoBehaviour
     // control the entry/exit of the rower in the boat
 
     //visible Properties
-    public float RiggerLength = 0.8f;
-    public float InboardLength = 0.88f; // spread / 2 + 8cm
-    public float OutboardLength = 2f; // 200cm
-    public float MaxPullForce = 450f; // 700 N
-    public float MaxPushForce = 200f;
-    public float TranslationalXDragFactor = 12f;
-    public float TranslationalYDragFactor = 0.1f;
-    public float TranslationalZDragFactor = 0.5f;
-    public float AngularDragFactor = 15f;
-    public float OarTranslationalZDragFactor = 3f;
-    public float OarAngularDragFactor = 0.5f;
-    public float RushingForceMultiplier = 0.3f;
+    public RowboatParams RowboatParams;
     public RowingInputListener InputListener;
     public OarlockListener OarlockListener;
     public Oar StarboardOar;
@@ -64,32 +53,34 @@ public class RowBoat : MonoBehaviour
 
     public void FixedUpdate()
     {
-        float translationalZDragFactor = TranslationalZDragFactor;
-        float angularDragFactor = AngularDragFactor;
+        float translationalZDragFactor = RowboatParams.TranslationalZDragFactor;
+        float angularDragFactor = RowboatParams.AngularDragFactor;
 
         // calculate drag on boat due to drag on oars when not pulling or when end of stroke reached
         if (_portState != OarState.OarOutOfWater && (!InputListener.IsRowingPort || OarlockListener.PortPullState == PullState.CannotPull))
         {
-            translationalZDragFactor += OarTranslationalZDragFactor * OarlockListener.PortEffortScalingFactor;
-            angularDragFactor += OarAngularDragFactor * OarlockListener.PortEffortScalingFactor;
+            translationalZDragFactor += RowboatParams.OarTranslationalZDragFactor * OarlockListener.PortEffortScalingFactor;
+            angularDragFactor += RowboatParams.OarAngularDragFactor * OarlockListener.PortEffortScalingFactor;
         }
 
         if (_starboardState != OarState.OarOutOfWater && (!InputListener.IsRowingStarboard || OarlockListener.StarboardPullState == PullState.CannotPull))
         {
-            translationalZDragFactor += OarTranslationalZDragFactor * OarlockListener.StarboardEffortScalingFactor;
-            angularDragFactor += OarAngularDragFactor * OarlockListener.StarboardEffortScalingFactor;
+            translationalZDragFactor += RowboatParams.OarTranslationalZDragFactor * OarlockListener.StarboardEffortScalingFactor;
+            angularDragFactor += RowboatParams.OarAngularDragFactor * OarlockListener.StarboardEffortScalingFactor;
         }
         
         // force and torque applied to boat when pulling on the oars
         if (_portState == OarState.OarInWater && OarlockListener.PortPullState == PullState.CanPull)
         {
             // linear scaling of force input
-            float inputForceMultiplier = _portStick.y > 0 ? MaxPushForce : MaxPullForce;
-            float boatForceMultiplier = inputForceMultiplier * -OarlockListener.PortEffortScalingFactor * (InboardLength / OutboardLength); // force on boat = Frower.z * (inboard/outboard)
+            float inputForceMultiplier = _portStick.y > 0 ? RowboatParams.MaxPushForce : RowboatParams.MaxPullForce;
+            float boatForceMultiplier = inputForceMultiplier * -OarlockListener.PortEffortScalingFactor * (RowboatParams.InboardLength / RowboatParams.OutboardLength); // force on boat = Frower.z * (inboard/outboard)
             
             Vector3 appliedForceOnBoat = transform.forward * _portStick.y * boatForceMultiplier;
-            Vector3 appliedTorqueOnBoat = Vector3.up * _portStick.y * RiggerLength * boatForceMultiplier; // torque on boat = force on boat x Lrigger = force on boat * Lrigger
+            Vector3 appliedTorqueOnBoat = Vector3.up * _portStick.y * RowboatParams.RiggerLength * boatForceMultiplier; // torque on boat = force on boat x Lrigger = force on boat * Lrigger
             
+            UnityEngine.Debug.Log("PORT Force: " + appliedForceOnBoat + " Torque: " + appliedTorqueOnBoat);
+
             Rigidbody.AddForce(appliedForceOnBoat);
             Rigidbody.AddRelativeTorque(appliedTorqueOnBoat);
         }
@@ -97,11 +88,13 @@ public class RowBoat : MonoBehaviour
         if (_starboardState == OarState.OarInWater && OarlockListener.StarboardPullState == PullState.CanPull)
         {
             // linear scaling of force input
-            float inputForceMultiplier = _starboardStick.y > 0 ? MaxPushForce : MaxPullForce;
-            float boatForceMultiplier = inputForceMultiplier * -OarlockListener.StarboardEffortScalingFactor * (InboardLength / OutboardLength); // force on boat = Frower.z * (inboard/outboard)
+            float inputForceMultiplier = _starboardStick.y > 0 ? RowboatParams.MaxPushForce : RowboatParams.MaxPullForce;
+            float boatForceMultiplier = inputForceMultiplier * -OarlockListener.StarboardEffortScalingFactor * (RowboatParams.InboardLength / RowboatParams.OutboardLength); // force on boat = Frower.z * (inboard/outboard)
 
             Vector3 appliedForceOnBoat = transform.forward * _starboardStick.y * boatForceMultiplier;
-            Vector3 appliedTorqueOnBoat = Vector3.up * _starboardStick.y * -1 * RiggerLength * boatForceMultiplier; // torque on boat = force on boat x Lrigger = force on boat * Lrigger
+            Vector3 appliedTorqueOnBoat = Vector3.up * _starboardStick.y * -1 * RowboatParams.RiggerLength * boatForceMultiplier; // torque on boat = force on boat x Lrigger = force on boat * Lrigger
+
+            UnityEngine.Debug.Log("STARBOARD Force: " + appliedForceOnBoat + " Torque: " + appliedTorqueOnBoat);
 
             Rigidbody.AddForce(appliedForceOnBoat);
             Rigidbody.AddRelativeTorque(appliedTorqueOnBoat);
@@ -110,7 +103,7 @@ public class RowBoat : MonoBehaviour
         // force from rushing the slide
         if ( PortOar.ShouldApplyRecoveryForce )
         {
-            Vector3 appliedForceOnBoat = transform.forward * _portStick.y * RushingForceMultiplier;
+            Vector3 appliedForceOnBoat = transform.forward * _portStick.y * RowboatParams.RushingForceMultiplier;
 
             // only add force, not torque, since it's caused by the rower rushing the slide
             Rigidbody.AddForce(appliedForceOnBoat);
@@ -118,7 +111,7 @@ public class RowBoat : MonoBehaviour
 
         if ( StarboardOar.ShouldApplyRecoveryForce )
         {
-            Vector3 appliedForceOnBoat = transform.forward * _starboardStick.y * RushingForceMultiplier;
+            Vector3 appliedForceOnBoat = transform.forward * _starboardStick.y * RowboatParams.RushingForceMultiplier;
             Rigidbody.AddForce(appliedForceOnBoat);
         }
 
@@ -131,8 +124,8 @@ public class RowBoat : MonoBehaviour
         Rigidbody.velocity = Vector3.Scale(
             Rigidbody.velocity,
             new Vector3(
-                (1 - Time.deltaTime * TranslationalXDragFactor),
-                (1 - Time.deltaTime * TranslationalYDragFactor),
+                (1 - Time.deltaTime * RowboatParams.TranslationalXDragFactor),
+                (1 - Time.deltaTime * RowboatParams.TranslationalYDragFactor),
                 (1 - Time.deltaTime * translationalZDragFactor)
             )
         );

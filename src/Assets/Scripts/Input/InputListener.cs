@@ -31,11 +31,9 @@ public class InputListener : MonoBehaviour
 
         switch(CurrentControl) {
             case ControlScheme.Player:
-                UnityEngine.Debug.Log("player");
                 PlayerInputListener.enabled = true;
                 break;
             case ControlScheme.Rowing:
-                UnityEngine.Debug.Log("rowing");
                 RowingInputListener.enabled = true;
                 break;
             default:

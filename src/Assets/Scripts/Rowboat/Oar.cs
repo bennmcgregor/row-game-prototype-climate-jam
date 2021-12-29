@@ -9,13 +9,8 @@ public class Oar : MonoBehaviour
     // listens to the oar state and updates the force/rotation on the oar rigidbody
 
     //visible Properties
-    public float RiggerLength = 0.8f; // spread = 160cm
-    public float InboardLength = 0.88f; // spread / 2 + 8cm
-    public float OutboardLength = 2f; // 200cm
-    public float MaxPullForce = 450f; // 700 N
-    public float MaxPushForce = 200f;
-    public float DragFactor = 1f;
     public bool IsPort = false;
+    public RowboatParams RowboatParams;
     public RowingInputListener InputListener;
     public Rigidbody OarRigidbody;
 
@@ -61,14 +56,14 @@ public class Oar : MonoBehaviour
 
         // Torque_net = 2 * Frower * inboard length
         // linear scaling of force input
-        float forceMultiplier = _stick.y > 0 ? MaxPushForce : MaxPullForce;
-        forceMultiplier = forceMultiplier * 2 * InboardLength; // torque on oar = 2 * Frower * inboard length
+        float forceMultiplier = _stick.y > 0 ? RowboatParams.MaxPushForce : RowboatParams.MaxPullForce;
+        forceMultiplier = forceMultiplier * 2 * RowboatParams.InboardLength; // torque on oar = 2 * Frower * inboard length
         OarRigidbody.AddRelativeTorque(transform.up * _angleMultiplier * -_stick.y * forceMultiplier);
 
         // TEMP: for oar moving during the recovery
         if (_state == OarState.OarOutOfWater)// && ( IsPort ? OarlockListener.PortPullState : OarlockListener.StarboardPullState ) == PullState.CanPull)
         {
-            Vector3 newAngularVel = new Vector3(OarRigidbody.angularVelocity.x, (BoatRigidbody.velocity.z * RecoveryVelMultiplier) / InboardLength, OarRigidbody.angularVelocity.z); // angular velocity = - boat translational velocity / radius
+            Vector3 newAngularVel = new Vector3(OarRigidbody.angularVelocity.x, (BoatRigidbody.velocity.z * RecoveryVelMultiplier) / RowboatParams.InboardLength, OarRigidbody.angularVelocity.z); // angular velocity = - boat translational velocity / radius
             
             // tell the rowboat to add lurch force from rushing the slide
             if ( _stick.y != 0 && Math.Abs( OarRigidbody.angularVelocity.y ) > Math.Abs ( newAngularVel.y ) )
