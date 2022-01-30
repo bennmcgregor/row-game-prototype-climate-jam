@@ -20,7 +20,7 @@ MonoBehaviour:
   TranslationalXDragFactor: 12
   TranslationalYDragFactor: 0.1
   TranslationalZDragFactor: 0.5
-  AngularDragFactor: 15
+  AngularDragFactor: 0.1
   OarTranslationalZDragFactor: 3
   OarAngularDragFactor: 0.5
   RushingForceMultiplier: 0.3

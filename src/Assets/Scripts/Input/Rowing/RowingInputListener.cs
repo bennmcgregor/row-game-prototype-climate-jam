@@ -24,10 +24,10 @@ public class RowingInputListener : MonoBehaviour
     public InputListener InputListener;
 
     // getter
-    public OarState PortOarState => _portOarState;
-    public OarState StarboardOarState => _starboardOarState;
-    public bool IsRowingPort => _portStick.y != 0;
-    public bool IsRowingStarboard => _starboardStick.y != 0;
+    public virtual OarState PortOarState => _portOarState;
+    public virtual OarState StarboardOarState => _starboardOarState;
+    public virtual bool IsRowingPort => _portStick.y != 0;
+    public virtual bool IsRowingStarboard => _starboardStick.y != 0;
 
     //internal Properties
     protected PlayerControls _controls;
