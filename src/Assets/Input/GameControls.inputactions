@@ -1,0 +1,34 @@
+{
+    "name": "GameControls",
+    "maps": [
+        {
+            "name": "RowingTest",
+            "id": "9ea4a343-59ec-41bf-b12f-7d2f88525c3c",
+            "actions": [
+                {
+                    "name": "Catch",
+                    "type": "Button",
+                    "id": "422b4de6-a9cd-4b0b-9f2f-ff29ff08c972",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=2)",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2233b83e-8fea-437a-bd57-4ac3921ad223",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Catch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

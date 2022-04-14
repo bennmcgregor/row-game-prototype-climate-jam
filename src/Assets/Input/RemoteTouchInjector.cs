@@ -18,7 +18,7 @@
  * Written by Mitch because he was upset at people being upset
  * 
  * INSTRUCTIONS
- * Ensure Input mode is set to "Both"  (Input and InputSystem) in Unity project settings
+ * Ensure Input mode is set to "Both"  (Input and InputSystem) in Unity project settings (Player -> Active Input Handling)
  * Use Unity Remote as normal.
  * 
  * NOTES

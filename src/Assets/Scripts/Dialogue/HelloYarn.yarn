@@ -1,0 +1,31 @@
+﻿title: HelloYarn
+tags:
+position: -2,-223
+---
+Wow!
+My first ever Yarn script in Unity!
+
+-> Gosh!
+-> Incredible!
+-> I'm amazed!
+
+Anyway, time to get writing!
+<<jump Writing>>
+===
+title: Writing
+position: -99,-64
+---
+Nico: Select a trust meter value:
+-> Mio: I want to increase it by 25%
+    <<add_trust TrustBar 0.25>>
+-> Mio: I want to increase it by 50%
+    <<add_trust TrustBar 0.5>>
+Nico: Thanks for selecting a trust meter value!
+<<if $trustCount <= 0.25>>
+    Nico: I only trust you {$trustCount * 100}%.
+<<elseif $trustCount <= 0.5>>
+    Nico: I trust you {$trustCount * 100}%.
+<<elseif $trustCount <= 1>>
+    Nico: I trust you up to {$trustCount * 100}%!
+<<endif>>
+===
