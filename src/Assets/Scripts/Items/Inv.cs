@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
+
 
 // TODO: Rename this and item to make more sense,
 public class Inv : MonoBehaviour
@@ -15,10 +17,7 @@ public class Inv : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            GetComponent<Renderer>().enabled = !GetComponent<Renderer>().enabled;
-        }
+        
     }
     private List<Item> itemList;
     private const int MAX_ITEMS = 10;
@@ -36,6 +35,11 @@ public class Inv : MonoBehaviour
             itemList.Add(i);
             rebuildDisplay();
         }
+    }
+
+    public void OnInventory()
+    {
+        //setActive(!gameObject.activeSelf);
     }
 
     public void dropItem(int i)

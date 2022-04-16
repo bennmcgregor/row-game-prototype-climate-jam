@@ -35,6 +35,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""170d6c5e-221a-4abd-a74f-450a156b594a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -48,6 +57,17 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""Catch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e0b06e15-762b-497a-805f-be14369d05c3"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -57,6 +77,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         // RowingTest
         m_RowingTest = asset.FindActionMap("RowingTest", throwIfNotFound: true);
         m_RowingTest_Catch = m_RowingTest.FindAction("Catch", throwIfNotFound: true);
+        m_RowingTest_Inventory = m_RowingTest.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -117,11 +138,13 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_RowingTest;
     private IRowingTestActions m_RowingTestActionsCallbackInterface;
     private readonly InputAction m_RowingTest_Catch;
+    private readonly InputAction m_RowingTest_Inventory;
     public struct RowingTestActions
     {
         private @GameControls m_Wrapper;
         public RowingTestActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Catch => m_Wrapper.m_RowingTest_Catch;
+        public InputAction @Inventory => m_Wrapper.m_RowingTest_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_RowingTest; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -134,6 +157,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Catch.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
                 @Catch.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
                 @Catch.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
+                @Inventory.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
             }
             m_Wrapper.m_RowingTestActionsCallbackInterface = instance;
             if (instance != null)
@@ -141,6 +167,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Catch.started += instance.OnCatch;
                 @Catch.performed += instance.OnCatch;
                 @Catch.canceled += instance.OnCatch;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
             }
         }
     }
@@ -148,5 +177,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     public interface IRowingTestActions
     {
         void OnCatch(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
