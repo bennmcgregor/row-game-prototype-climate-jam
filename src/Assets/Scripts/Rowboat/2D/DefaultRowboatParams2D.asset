@@ -20,3 +20,6 @@ MonoBehaviour:
   NoBowEffectTimingMultiplier: 1
   PerfectTimingMultiplier: 4
   InTimeTimingMultiplier: 1.5
+  RudderMotionThreshhold: 0.2
+  RudderTimerThreshhold: 0.5
+  RudderAccelerationThreshhold: 0.09
