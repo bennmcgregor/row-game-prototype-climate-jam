@@ -12,6 +12,7 @@ public class PlayerRowboatParams : ScriptableObject
     public float DriveRecoveryRatio = 2f;
     public float MaxAcceleration = 5f; // random number, needs adjusting
     public float MaxA = 3f;
+    public float SpamTimeThreshold = 0.5f; // minimum duration between spacebar presses
 
     public float DriveSpeed => RecoverySpeed * DriveRecoveryRatio;
 }

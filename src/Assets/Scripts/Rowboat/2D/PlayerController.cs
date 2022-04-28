@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private ForceCurve _currentForceCurve;
     private float _timeDelta;
     private float _force;
+    private float _spamTimer;
 
     public float CatchPosition => _catchPosition;
     public float FinishPosition => _finishPosition;
@@ -33,6 +34,7 @@ public class PlayerController : MonoBehaviour
         UpdateCatchPosition(100);
         UpdateFinishPosition(0);
         _timeDelta = 0;
+        _spamTimer = 0;
     }
 
     public float GetSliderPosition()
@@ -48,21 +50,26 @@ public class PlayerController : MonoBehaviour
                 UpdateFinishPosition(GetSliderPosition());
                 _velocity = _playerRowboatParams.RecoverySpeed;
                 _force = 0;
+                _stateMachine.StateTransition();
                 break;
             case RowingState.RECOVERY:
-                UpdateCatchPosition(GetSliderPosition());
-                float predictedDriveLength = _catchPosition - _finishPosition;
-                _currentForceCurve = new ForceCurve(
-                    predictedDriveLength,
-                    _playerRowboatParams.RecoverySpeed,
-                    _playerRowboatParams.MaxAcceleration,
-                    predictedDriveLength / _playerRowboatParams.DriveSpeed);
-                UpdateVelocityForDrive(0);
+                if (_spamTimer > _playerRowboatParams.SpamTimeThreshold)
+                {
+                    UpdateCatchPosition(GetSliderPosition());
+                    float predictedDriveLength = _catchPosition - _finishPosition;
+                    _currentForceCurve = new ForceCurve(
+                        predictedDriveLength,
+                        _playerRowboatParams.RecoverySpeed,
+                        _playerRowboatParams.MaxAcceleration,
+                        predictedDriveLength / _playerRowboatParams.DriveSpeed);
+                    UpdateVelocityForDrive(0);
+                    _spamTimer = 0;
+                    _stateMachine.StateTransition();
+                }
                 break;
             default:
                 break;
         }
-        _stateMachine.StateTransition();
     }
 
     private void UpdateCatchPosition(float pos)
@@ -99,5 +106,10 @@ public class PlayerController : MonoBehaviour
         {
             UpdateVelocityForDrive(_timeDelta + 1);
         }
+    }
+
+    private void Update()
+    {
+        _spamTimer += Time.deltaTime;
     }
 }

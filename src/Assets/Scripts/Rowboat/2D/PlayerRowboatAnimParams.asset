@@ -16,3 +16,4 @@ MonoBehaviour:
   DriveRecoveryRatio: 2
   MaxAcceleration: 0.1
   MaxA: 1
+  SpamTimeThreshold: 1
