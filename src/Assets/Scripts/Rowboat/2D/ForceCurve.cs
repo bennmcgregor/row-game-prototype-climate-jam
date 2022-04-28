@@ -31,7 +31,7 @@ public class ForceCurve
         return mult1 * mult2;
     }
 
-    public bool IsAPastLimit(float limit)
+    public bool IsAPastLimit(float limit) 
     {
         return _a > limit;
     }
@@ -60,5 +60,15 @@ public class ForceCurve
         float sum2 = t*t*_a*_tMax;
         float sum3 = t*t*t*(_a / 3.0f);
         return sum1 + sum2 - sum3 + _v0;
+    }
+
+    public float GetForceAtTime(float t)
+    {
+        if (t > _tFinal)
+        {
+            return 0;
+        }
+
+        return _fMax - _a*(t-_tMax)*(t-_tMax);
     }
 }

@@ -433,7 +433,8 @@ MonoBehaviour:
   _slider: {fileID: 359075150}
   _velocity: 1
   _sliderPlayer: {fileID: 963723922}
-  _kMaximumSpeed: 2.5
+  _maximumSpeed: 2.5
+  _delayTime: 0.2
 --- !u!114 &359075150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,6 +1473,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _slider: {fileID: 963723920}
+  _playerRowboatParams: {fileID: 11400000, guid: 30aa6420a13234ed6a47be6299e900e1,
+    type: 2}
   _velocity: 1
 --- !u!1 &1014147658
 GameObject:
