@@ -21,9 +21,12 @@ public class RowBoat2D : MonoBehaviour
     private RudderStateMachine _rudderStateMachine;
     private float _rudderTimer = 0f;
     private bool _hasMovedVerticallyOnThisStroke = false;
+    private bool _isReverse = false;
 
     // multiplies the force from the player based on how in time the two rowers are.
     private float _timingMultiplier;
+
+    public bool IsReverse => _isReverse;
 
     private void Awake()
     {
@@ -39,6 +42,11 @@ public class RowBoat2D : MonoBehaviour
     public void OnRudderDown()
     {
         _rudderStateMachine.OnRudderDown();
+    }
+
+    public void OnReverse()
+    {
+        _isReverse = !_isReverse;
     }
 
     private void FixedUpdate()
@@ -61,6 +69,10 @@ public class RowBoat2D : MonoBehaviour
             else
             {
                 boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPullForce;
+                if (_isReverse)
+                {
+                    boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPushForce;
+                }
             }
 
             UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
@@ -120,6 +132,10 @@ public class RowBoat2D : MonoBehaviour
         }
 
         float boatForceMultiplier = boatForceMultiplierStroke * _timingMultiplier;
+        if (_isReverse)
+        {
+            boatForceMultiplier *= -1;
+        }
         _rigidbody2D.AddForce(Vector2.right * boatForceMultiplier);
     }
 

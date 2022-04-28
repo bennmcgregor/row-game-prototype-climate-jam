@@ -9,6 +9,7 @@ public class RowboatSlider : MonoBehaviour
     [SerializeField] private Sprite[] _recoverySequence = default;
     [SerializeField] private float _startValue = 0f;
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private RowBoat2D _rowboat = default;
 
     public float Value => _value;
     public bool ShouldApplyDrag => _shouldApplyDrag;
@@ -73,6 +74,11 @@ public class RowboatSlider : MonoBehaviour
         float scale = (float) newScale - 0.01f;
         float unrounded = (scale / 100f) * (Math.Abs(_value) - 100f) + scale;
         // UnityEngine.Debug.Log($"unrounded: {unrounded}");
-        return (int) Math.Floor(unrounded); // floor so that the sprites are evenly distributed
+        int idx = (int) Math.Floor(unrounded); // floor so that the sprites are evenly distributed
+        if (_rowboat.IsReverse)
+        {
+            return newScale - 1 - idx;
+        }
+        return idx;
     }
 }

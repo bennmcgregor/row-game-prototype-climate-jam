@@ -126,6 +126,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 9552e4535e09b45839123b02710879c6, type: 3}
   _startValue: 0
   _spriteRenderer: {fileID: 3747141279918311440}
+  _rowboat: {fileID: 3747141280413476372}
 --- !u!114 &3747141279918311454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -399,6 +400,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 93c06bed76f3347718e54f72acb32d54, type: 3}
   _startValue: 0
   _spriteRenderer: {fileID: 3747141280657038383}
+  _rowboat: {fileID: 3747141280413476372}
 --- !u!114 &3747141280657038381
 MonoBehaviour:
   m_ObjectHideFlags: 0
