@@ -2,51 +2,53 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SlideShow : MonoBehaviour
 {
-    private int currentIndex = 0;
-    [SerializeField]
-    public float[] times;
-    // Start is called before the first frame update
+    public Action OnSlideshowFinished;
 
-    private List<Transform> children = new List<Transform>();
+    [SerializeField] public float[] _times;
 
-    public float nextActionTime = 0;
-    void Start()
+    private List<Transform> _children = new List<Transform>();
+    private float _nextActionTime = 0;
+    private int _currentIndex = 0;
+    private bool _hasStarted = false;
+
+    public void StartSlideshow()
     {
-        nextActionTime = Time.time + times[0];
+        _nextActionTime = Time.time + _times[0];
         foreach (Transform child in transform)
         {
-            children.Add(child);
+            _children.Add(child);
             child.gameObject.SetActive(false);
         }
-        children[0].gameObject.SetActive(true);
+        _children[0].gameObject.SetActive(true);
+        _hasStarted = true;
     }
 
-    void Update()
+    private void Update()
     {
-        if (Time.time > nextActionTime)
+        if (_hasStarted)
         {
-           nextSlide();
+            if (Time.time > _nextActionTime)
+            {
+                NextSlide();
+            }
         }
     }
 
-    public void nextSlide()
+    private void NextSlide()
     {
-        if (currentIndex + 1 < children.Count)
-         {
-             children[currentIndex].gameObject.SetActive(false);
-             children[++currentIndex].gameObject.SetActive(true);
-             nextActionTime += times[currentIndex];
-         }
-         else if (SceneManager.sceneCountInBuildSettings == SceneManager.GetActiveScene().buildIndex + 1)
-         {
-            SceneManager.LoadScene(0);
+        if (_currentIndex + 1 < _children.Count)
+        {
+            _children[_currentIndex].gameObject.SetActive(false);
+            _children[++_currentIndex].gameObject.SetActive(true);
+            _nextActionTime += _times[_currentIndex];
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            OnSlideshowFinished?.Invoke();
         }
     }
 }

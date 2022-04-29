@@ -143,6 +143,7 @@ MonoBehaviour:
   _playerRowboatParams: {fileID: 11400000, guid: 30aa6420a13234ed6a47be6299e900e1,
     type: 2}
   _velocity: 1
+  _rowboat: {fileID: 3747141280413476372}
 --- !u!1 &3747141280413476392
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,3 +419,4 @@ MonoBehaviour:
   _playerController: {fileID: 3747141279918311454}
   _maximumSpeed: 3
   _delayTime: 0.2
+  _rowboat: {fileID: 3747141280413476372}

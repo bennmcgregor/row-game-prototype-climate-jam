@@ -17,15 +17,21 @@ public class RowboatSlider : MonoBehaviour
     // value on a scale from 0 to 100
     private float _value;
     private bool _shouldApplyDrag = false;
+    // private bool _isTransitionConcluded = false;
+    // private int _currentIndex;
+    // private bool _currentlyDrive = false;
 
     private void Awake()
     {
         _value = _startValue;
         _spriteRenderer.sprite = _recoverySequence[0];
+
+        // _rowboat.OnReverseStarted += () => StartCoroutine(TransitionSprite());
+        // _rowboat.OnReverseEnded += () => StartCoroutine(TransitionSprite());
     }
 
     // animates the rowboat
-    public void AddValue(float value)
+    public void AddValue(float value, RowingState rowingState)
     {
         // UnityEngine.Debug.Log(value);
 
@@ -39,19 +45,21 @@ public class RowboatSlider : MonoBehaviour
             _value = 100;
         }
 
-        UpdateSprite(value);
+        UpdateSprite(value, rowingState);
     }
 
-    private void UpdateSprite(float value)
+    private void UpdateSprite(float value, RowingState rowingState)
     {
         Sprite sprite;
-        if (value >= 0) // recovery
+        if (rowingState == RowingState.RECOVERY)
         {
+            // _currentlyDrive = false;
             // UnityEngine.Debug.Log($"recovery: {GetSpriteIndex(_recoverySequence.Length)}");
             sprite = _recoverySequence[GetSpriteIndex(_recoverySequence.Length)];
         }
-        else // drive
+        else
         {
+            // _currentlyDrive = true;
             // UnityEngine.Debug.Log($"drive: {GetSpriteIndex(_driveSequence.Length)}");
             int idx = GetSpriteIndex(_driveSequence.Length);
             sprite = _driveSequence[idx];
@@ -75,10 +83,47 @@ public class RowboatSlider : MonoBehaviour
         float unrounded = (scale / 100f) * (Math.Abs(_value) - 100f) + scale;
         // UnityEngine.Debug.Log($"unrounded: {unrounded}");
         int idx = (int) Math.Floor(unrounded); // floor so that the sprites are evenly distributed
-        if (_rowboat.IsReverse)
+        if (_rowboat.DirectionState == DirectionState.REVERSE/* && _isTransitionConcluded || // reverse
+            !_rowboat.IsReverse && !_isTransitionConcluded*/) // when transitioning from reverse
         {
+            // _currentIndex = newScale - 1 - idx;
             return newScale - 1 - idx;
         }
+        // _currentIndex = idx;
         return idx;
     }
+
+    // private IEnumerator TransitionSprite()
+    // {
+    //     _isTransitionConcluded = false;
+    //     int newScale = _recoverySequence.Length;
+    //     if (_currentlyDrive)
+    //     {
+    //         newScale = _driveSequence.Length;
+    //     }
+
+    //     while (_currentIndex != GetSpriteIndex(newScale))
+    //     {
+    //         if (_currentIndex > GetSpriteIndex(newScale))
+    //         {
+    //             _currentIndex -= 1;
+    //         }
+    //         else
+    //         {
+    //             _currentIndex += 1;
+    //         }
+
+    //         if (_currentlyDrive)
+    //         {
+    //             _spriteRenderer.sprite = _driveSequence[_currentIndex];
+    //         }
+    //         else
+    //         {
+    //             _spriteRenderer.sprite = _recoverySequence[_currentIndex];
+    //         }
+
+    //         yield return new WaitForSeconds(.05f);
+    //     }
+    //     _isTransitionConcluded = true;
+    // }
 }

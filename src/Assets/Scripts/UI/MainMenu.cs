@@ -5,15 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public int creditScene = 1;
+    [SerializeField] private SceneLoader _sceneLoader;
+    [SerializeField] private string _creditsSceneName;
 
-    public void PlayGame ()
+    private void Awake()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        _sceneLoader.LoadNextScene();
     }
 
-    public void OpenCredits ()
+    public void PlayGame()
     {
-        SceneManager.LoadScene(creditScene);
+        _sceneLoader.ActivateNextScene();
+    }
+
+    public void OpenCredits()
+    {
+        SceneManager.LoadScene(_creditsSceneName);
     }
 }
