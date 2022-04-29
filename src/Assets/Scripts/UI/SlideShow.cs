@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
 
-public class SlideShow : MonoBehaviour
+public class SlideShow : SlideShowBase
 {
-    public Action OnSlideshowFinished;
-
     [SerializeField] public float[] _times;
 
     private List<Transform> _children = new List<Transform>();
@@ -15,7 +13,7 @@ public class SlideShow : MonoBehaviour
     private int _currentIndex = 0;
     private bool _hasStarted = false;
 
-    public void StartSlideshow()
+    public override void StartSlideshow(int startingSlideIdx = 0)
     {
         _nextActionTime = Time.time + _times[0];
         foreach (Transform child in transform)
@@ -23,7 +21,7 @@ public class SlideShow : MonoBehaviour
             _children.Add(child);
             child.gameObject.SetActive(false);
         }
-        _children[0].gameObject.SetActive(true);
+        _children[startingSlideIdx].gameObject.SetActive(true);
         _hasStarted = true;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CutsceneController : MonoBehaviour
 {
-    [SerializeField] private SlideShow _slideShow;
+    [SerializeField] private SlideShowBase _slideShow;
     [SerializeField] private AudioSource _audioSource;
     private SceneLoader _sceneLoader;
 
