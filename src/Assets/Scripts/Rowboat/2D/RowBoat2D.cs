@@ -75,7 +75,7 @@ public class RowBoat2D : MonoBehaviour
                 }
             }
 
-            UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
+            //UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
             // move the boat vertically, if necessary
             if ((_rudderTimer > _rowboatParams2D.RudderTimerThreshhold ||
                 Math.Abs(_playerController.CurrentForce) > _rowboatParams2D.RudderAccelerationThreshhold) && 

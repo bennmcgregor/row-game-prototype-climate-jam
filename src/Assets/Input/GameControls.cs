@@ -42,7 +42,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""id"": ""170d6c5e-221a-4abd-a74f-450a156b594a"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -70,6 +70,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Press(behavior=2)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""f681e2bc-b25b-4327-8d5e-52aa2331a4f7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -150,6 +159,17 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""Reverse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ce288ca-4b24-42a4-97b4-8cadb8a70dd9"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -163,6 +183,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         m_RowingTest_RudderUp = m_RowingTest.FindAction("RudderUp", throwIfNotFound: true);
         m_RowingTest_RudderDown = m_RowingTest.FindAction("RudderDown", throwIfNotFound: true);
         m_RowingTest_Reverse = m_RowingTest.FindAction("Reverse", throwIfNotFound: true);
+        m_RowingTest_Interact = m_RowingTest.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -227,6 +248,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_RowingTest_RudderUp;
     private readonly InputAction m_RowingTest_RudderDown;
     private readonly InputAction m_RowingTest_Reverse;
+    private readonly InputAction m_RowingTest_Interact;
     public struct RowingTestActions
     {
         private @GameControls m_Wrapper;
@@ -236,6 +258,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         public InputAction @RudderUp => m_Wrapper.m_RowingTest_RudderUp;
         public InputAction @RudderDown => m_Wrapper.m_RowingTest_RudderDown;
         public InputAction @Reverse => m_Wrapper.m_RowingTest_Reverse;
+        public InputAction @Interact => m_Wrapper.m_RowingTest_Interact;
         public InputActionMap Get() { return m_Wrapper.m_RowingTest; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -260,6 +283,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Reverse.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
                 @Reverse.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
                 @Reverse.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
+                @Interact.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_RowingTestActionsCallbackInterface = instance;
             if (instance != null)
@@ -279,6 +305,9 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                 @Reverse.started += instance.OnReverse;
                 @Reverse.performed += instance.OnReverse;
                 @Reverse.canceled += instance.OnReverse;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -290,5 +319,6 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         void OnRudderUp(InputAction.CallbackContext context);
         void OnRudderDown(InputAction.CallbackContext context);
         void OnReverse(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }
