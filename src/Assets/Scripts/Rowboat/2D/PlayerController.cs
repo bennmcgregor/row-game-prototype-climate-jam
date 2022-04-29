@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
         _stateMachine = new RowingStateMachine(RowingState.RECOVERY);
         UpdateCatchPosition(100);
         UpdateFinishPosition(0);
+
         _timeDelta = 0;
         _spamTimer = 0;
     }
@@ -54,8 +55,7 @@ public class PlayerController : MonoBehaviour
                 _stateMachine.StateTransition();
                 break;
             case RowingState.RECOVERY:
-                if (_spamTimer > _playerRowboatParams.SpamTimeThreshold && 
-                    _rowboat.DirectionState != DirectionState.STOPPING) // don't accept new spacebar presses when stopping
+                if (_spamTimer > _playerRowboatParams.SpamTimeThreshold)
                 {
                     UpdateCatchPosition(GetSliderPosition());
                     float predictedDriveLength = _catchPosition - _finishPosition;
@@ -74,55 +74,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnReverse()
-    {
-        _velocity = 0;
-        StartCoroutine(StopBoat());
-    }
-
-    private IEnumerator StopBoat()
-    {
-        while (Math.Round(_slider.Value) != 50)
-        {
-            if (_slider.Value >= 55)
-            {
-                _slider.AddValue(-5, RowingState.DRIVE);
-            }
-            else if (_slider.Value > 50 && _slider.Value < 55)
-            {
-                _slider.AddValue(-1, RowingState.DRIVE);
-            }
-            else if (_slider.Value < 50 && _slider.Value > 45)
-            {
-                _slider.AddValue(1, RowingState.DRIVE);
-            }
-            else if (_slider.Value <= 45)
-            {
-                _slider.AddValue(5, RowingState.DRIVE);
-            }
-            yield return new WaitForFixedUpdate();
-        }
-        UnityEngine.Debug.Log("run stopboat player");
-        if (_stateMachine.State == RowingState.DRIVE)
-        {
-            _stateMachine.StateTransition();
-        }
-        // _velocity = 1f;
-        UpdateCatchPosition(100);
-        UpdateFinishPosition(0);
-    }
-
     private void UpdateCatchPosition(float pos)
     {
         _catchPosition = pos;
-        // UnityEngine.Debug.Log($"new _catchPosition = {_catchPosition}");
+        UnityEngine.Debug.Log($"new _catchPosition = {_catchPosition}");
         OnCatchPositionUpdated?.Invoke(_catchPosition);
     }
 
     private void UpdateFinishPosition(float pos)
     {
         _finishPosition = pos;
-        // UnityEngine.Debug.Log($"new _finishPosition = {_finishPosition}");
+        UnityEngine.Debug.Log($"new _finishPosition = {_finishPosition}");
         OnFinishPositionUpdated?.Invoke(_finishPosition);
     }
 
@@ -138,7 +100,7 @@ public class PlayerController : MonoBehaviour
     {
         _slider.AddValue(_velocity, _stateMachine.State);
 
-        if (_stateMachine.State == RowingState.DRIVE && _rowboat.DirectionState != DirectionState.STOPPING)
+        if (_stateMachine.State == RowingState.DRIVE)
         {
             UpdateVelocityForDrive(_timeDelta + 1);
         }

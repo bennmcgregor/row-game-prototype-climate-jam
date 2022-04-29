@@ -29,7 +29,7 @@ public class NPCController : MonoBehaviour
         _stateMachine = new RowingStateMachine(RowingState.RECOVERY);
         _playerController.OnCatchPositionUpdated += OnCatchPositionUpdated;
         _playerController.OnFinishPositionUpdated += OnFinishPositionUpdated;
-        _rowboat.OnStopEnded += OnStopEnded;
+
         _hasCatchUpdate = false;
         _hasFinishUpdate = false;
     }
@@ -60,58 +60,12 @@ public class NPCController : MonoBehaviour
         _hasFinishUpdate = true;
     }
 
-    public void OnReverse()
-    {
-        // _velocity = 0;
-        StopCoroutine(FollowPlayer()); // stop following the player
-        StartCoroutine(StopBoat());
-    }
-
-    private IEnumerator StopBoat()
-    {
-        while (Math.Round(_slider.Value) != 50)
-        {
-            if (_slider.Value >= 55)
-            {
-                _slider.AddValue(-5, RowingState.DRIVE);
-            }
-            else if (_slider.Value > 50 && _slider.Value < 55)
-            {
-                _slider.AddValue(-1, RowingState.DRIVE);
-            }
-            else if (_slider.Value < 50 && _slider.Value > 45)
-            {
-                _slider.AddValue(1, RowingState.DRIVE);
-            }
-            else if (_slider.Value <= 45)
-            {
-                _slider.AddValue(5, RowingState.DRIVE);
-            }
-            yield return new WaitForFixedUpdate();
-        }
-        UnityEngine.Debug.Log("run stopboat npc");
-    }
-
-    private void OnStopEnded()
-    {
-        StopCoroutine(StopBoat());
-        if (_stateMachine.State == RowingState.DRIVE)
-        {
-            _stateMachine.StateTransition();
-        }
-        _hasCatchUpdate = false;
-        _hasFinishUpdate = false;
-        _playerMostRecentCatchPosition = _playerController.CatchPosition;
-        _playerMostRecentFinishPosition = _playerController.FinishPosition;
-        _velocity = 1f;
-        StartCoroutine(FollowPlayer());
-    }
-
     private void UpdateVelocityForRecovery()
     {
         // calculate and update current velocity
         float predictedTimeToCatchForPlayer = (_playerMostRecentCatchPosition 
             - _playerController.GetSliderPosition()) / _playerController.CurrentSpeed;
+        
         float requiredSpeedToMatchPlayer = 0;
         // player has not yet reached predicted catch position
         if (predictedTimeToCatchForPlayer > 0)
@@ -363,7 +317,6 @@ public class NPCController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        UnityEngine.Debug.Log($"_velocity npc: {_velocity}");
         _slider.AddValue(_velocity, _stateMachine.State);
     }
 /*

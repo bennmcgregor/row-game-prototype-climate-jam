@@ -1,7 +1,6 @@
 public enum DirectionState {
     FORWARD,
-    REVERSE,
-    STOPPING
+    REVERSE
 }
 
 public class DirectionStateMachine
@@ -18,9 +17,16 @@ public class DirectionStateMachine
         _prevState = initialState;
     }
 
-    public void SetState(DirectionState state)
+    public void StateTransition()
     {
         _prevState = _state;
-        _state = state;
+        if (_state == DirectionState.FORWARD)
+        {
+            _state = DirectionState.REVERSE;
+        }
+        else
+        {
+            _state = DirectionState.FORWARD;
+        }
     }
 }

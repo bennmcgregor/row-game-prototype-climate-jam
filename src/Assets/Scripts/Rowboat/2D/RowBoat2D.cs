@@ -10,8 +10,6 @@ public class RowBoat2D : MonoBehaviour
     // move the camera to follow the boat at all times
     // control the entry/exit of the rower in the boat
 
-    public Action OnStopEnded;
-
     //visible Properties
     [SerializeField] private RowboatParams2D _rowboatParams2D;
     [SerializeField] private PlayerController _playerController;
@@ -23,6 +21,7 @@ public class RowBoat2D : MonoBehaviour
     private RudderStateMachine _rudderStateMachine;
     private float _rudderTimer = 0f;
     private bool _hasMovedVerticallyOnThisStroke = false;
+    private bool _hasStoppedBoatOnThisStroke = false;
 
     // multiplies the force from the player based on how in time the two rowers are.
     private float _timingMultiplier;
@@ -39,141 +38,128 @@ public class RowBoat2D : MonoBehaviour
 
     public void OnRudderUp()
     {
-        if (DirectionState != DirectionState.STOPPING)
-        {
-            _rudderStateMachine.OnRudderUp();
-        }
+        _rudderStateMachine.OnRudderUp();
     }
 
     public void OnRudderDown()
     {
-        if (DirectionState != DirectionState.STOPPING)
-        {
-            _rudderStateMachine.OnRudderDown();
-        }
+        _rudderStateMachine.OnRudderDown();
     }
 
     public void OnReverse()
     {
-        _directionStateMachine.SetState(DirectionState.STOPPING);
+        _directionStateMachine.StateTransition();
     }
 
     private void FixedUpdate()
     {
         float boatForceMultiplierStroke = 0;
         
-        if (DirectionState != DirectionState.STOPPING)
+        if (_playerController.CurrentState == RowingState.DRIVE)
         {
-            if (_playerController.CurrentState == RowingState.DRIVE)
+            _rudderTimer += Time.deltaTime;
+            if (!_hasPlayerCatched && _hasDriveEnded)
             {
-                _rudderTimer += Time.deltaTime;
-                if (!_hasPlayerCatched && _hasDriveEnded)
-                {
-                    _hasPlayerCatched = true;
-                    _hasDriveEnded = false;
-                }
-
-                if (_playerController.Slider.ShouldApplyDrag) // when the oars are stuck in the water at the finish
-                {
-                    boatForceMultiplierStroke = -1 * _rowboatParams2D.OarDragForce;
-                }
-                else
-                {
-                    boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPullForce;
-                    if (DirectionState == DirectionState.REVERSE)
-                    {
-                        boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPushForce;
-                    }
-                }
-
-                // UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
-                // move the boat vertically, if necessary
-                if ((_rudderTimer > _rowboatParams2D.RudderTimerThreshhold ||
-                    Math.Abs(_playerController.CurrentForce) > _rowboatParams2D.RudderAccelerationThreshhold) && 
-                    Math.Abs(_rigidbody2D.velocity.x) > _rowboatParams2D.RudderMotionThreshhold &&
-                    !_hasMovedVerticallyOnThisStroke)
-                {
-                    switch (_rudderStateMachine.State)
-                    {
-                        case RudderState.UP:
-                            MoveVertically(false);
-                            _hasMovedVerticallyOnThisStroke = true;
-                            break;
-                        case RudderState.DOWN:
-                            MoveVertically(true);
-                            _hasMovedVerticallyOnThisStroke = true;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-            else if (_playerController.CurrentState == RowingState.RECOVERY)
-            {
-                if (!_hasDriveEnded)
-                {
-                    _hasDriveEnded = true;
-                    _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
-                    _rudderTimer = 0;
-                    _hasMovedVerticallyOnThisStroke = false;
-                }
+                _hasPlayerCatched = true;
+                _hasDriveEnded = false;
             }
 
-            if (_npcController.CurrentState == RowingState.DRIVE)
-            {
-                if (_hasPlayerCatched)
-                {
-                    float distanceDelta = Math.Abs(_npcController.Slider.Value - _playerController.Slider.Value) / 100f;
-                    if (distanceDelta < _rowboatParams2D.InPerfectTimeThreshhold)
-                    {
-                        _timingMultiplier = _rowboatParams2D.PerfectTimingMultiplier;
-                    }
-                    else if (distanceDelta < _rowboatParams2D.InTimeThreshhold)
-                    {
-                        _timingMultiplier = _rowboatParams2D.InTimeTimingMultiplier;
-                    }
-                    else
-                    {
-                        _timingMultiplier = 1f - (float) Math.Sqrt(distanceDelta);
-                    }
-                    // UnityEngine.Debug.Log($"dd: {distanceDelta}, _timingMultiplier: {_timingMultiplier}");
-
-                    _hasPlayerCatched = false;
-                }
-            }
-
-            float boatForceMultiplier = boatForceMultiplierStroke * _timingMultiplier;
+            boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPullForce;
             if (DirectionState == DirectionState.REVERSE)
             {
-                boatForceMultiplier *= -1;
+                boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPushForce;
             }
-            _rigidbody2D.AddForce(Vector2.right * boatForceMultiplier);
-        }
-        else
-        {
-            // keep applying a force until the boat stops
-            if (_rigidbody2D.velocity.x > _rowboatParams2D.StoppingSpeedThreshhold)
+
+            // UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
+            // move the boat vertically, if necessary
+            if ((_rudderTimer > _rowboatParams2D.RudderTimerThreshhold ||
+                Math.Abs(_playerController.CurrentForce) > _rowboatParams2D.RudderAccelerationThreshhold) && 
+                Math.Abs(_rigidbody2D.velocity.x) > _rowboatParams2D.RudderMotionThreshhold &&
+                !_hasMovedVerticallyOnThisStroke)
             {
-                // UnityEngine.Debug.Log($"X velocity UPPER: {_rigidbody2D.velocity.x}");
-                _rigidbody2D.AddForce(Vector2.right * -1 * _rowboatParams2D.StoppingForce);
-            }
-            else if (_rigidbody2D.velocity.x < -1 * _rowboatParams2D.StoppingSpeedThreshhold)
-            {
-                // UnityEngine.Debug.Log($"X velocity LOWER: {_rigidbody2D.velocity.x}");
-                _rigidbody2D.AddForce(Vector2.right * _rowboatParams2D.StoppingForce);
-            }
-            else // when the boat stops, update the state
-            {
-                UnityEngine.Debug.Log("run here");
-                if (_directionStateMachine.PrevState == DirectionState.FORWARD)
+                switch (_rudderStateMachine.State)
                 {
-                    _directionStateMachine.SetState(DirectionState.REVERSE);
+                    case RudderState.UP:
+                        MoveVertically(false);
+                        _hasMovedVerticallyOnThisStroke = true;
+                        break;
+                    case RudderState.DOWN:
+                        MoveVertically(true);
+                        _hasMovedVerticallyOnThisStroke = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            // apply some extra force in the opposite direction to stop the boat
+            if ((DirectionState == DirectionState.FORWARD && 
+                 _rigidbody2D.velocity.x < 0 - _rowboatParams2D.StoppingSpeedThreshhold ||
+                 DirectionState == DirectionState.REVERSE &&
+                 _rigidbody2D.velocity.x > 0 + _rowboatParams2D.StoppingSpeedThreshhold) &&
+                !_hasStoppedBoatOnThisStroke)
+            {
+                _rigidbody2D.AddForce(-_rigidbody2D.velocity * _rigidbody2D.mass, ForceMode2D.Impulse);
+                _hasStoppedBoatOnThisStroke = true;
+            }
+        }
+        else if (_playerController.CurrentState == RowingState.RECOVERY)
+        {
+            if (!_hasDriveEnded)
+            {
+                _hasDriveEnded = true;
+                _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
+                _rudderTimer = 0;
+                _hasMovedVerticallyOnThisStroke = false;
+                _hasStoppedBoatOnThisStroke = false;
+            }
+        }
+
+        if (_npcController.CurrentState == RowingState.DRIVE)
+        {
+            if (_hasPlayerCatched)
+            {
+                float distanceDelta = Math.Abs(_npcController.Slider.Value - _playerController.Slider.Value) / 100f;
+                if (distanceDelta < _rowboatParams2D.InPerfectTimeThreshhold)
+                {
+                    _timingMultiplier = _rowboatParams2D.PerfectTimingMultiplier;
+                }
+                else if (distanceDelta < _rowboatParams2D.InTimeThreshhold)
+                {
+                    _timingMultiplier = _rowboatParams2D.InTimeTimingMultiplier;
                 }
                 else
                 {
-                    _directionStateMachine.SetState(DirectionState.FORWARD);
+                    _timingMultiplier = 1f - (float) Math.Sqrt(distanceDelta);
                 }
-                OnStopEnded?.Invoke();
+                // UnityEngine.Debug.Log($"dd: {distanceDelta}, _timingMultiplier: {_timingMultiplier}");
+
+                _hasPlayerCatched = false;
+            }
+        }
+
+        float boatForceMultiplier = boatForceMultiplierStroke * _timingMultiplier;
+        if (DirectionState == DirectionState.REVERSE)
+        {
+            boatForceMultiplier *= -1;
+        }
+
+        if (!_hasStoppedBoatOnThisStroke)
+        {
+            // oars left in the water at the finish for too long
+            if (_playerController.GetSliderPosition() == 0 && 
+                _playerController.CurrentState == RowingState.DRIVE &&
+                Math.Abs(boatForceMultiplier) > 0)
+            {
+                UnityEngine.Debug.Log("ApplyOarDrag");
+                _rigidbody2D.AddForce(
+                    -_rigidbody2D.velocity*_rigidbody2D.mass*_rowboatParams2D.OarDragScalingFactor,
+                    ForceMode2D.Impulse
+                );
+            }
+            else
+            {
+                _rigidbody2D.AddForce(Vector2.right * boatForceMultiplier);
             }
         }
     }
