@@ -5,6 +5,8 @@ using System;
 
 public class SlideShow : SlideShowBase
 {
+    public Action OnNextSlide;
+
     [SerializeField] private float[] _times;
 
     private List<Transform> _children = new List<Transform>();
@@ -44,6 +46,7 @@ public class SlideShow : SlideShowBase
             _children[_currentIndex].gameObject.SetActive(false);
             _children[++_currentIndex].gameObject.SetActive(true);
             _nextActionTime += _times[_currentIndex];
+            OnNextSlide?.Invoke();
         }
         else
         {
