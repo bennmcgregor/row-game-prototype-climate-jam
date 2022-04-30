@@ -379,7 +379,7 @@ MonoBehaviour:
   _driveSequence:
   - {fileID: 21300000, guid: 20b3d5bd79a2c4b84a861f78a83960a2, type: 3}
   - {fileID: 21300000, guid: 9c079381853e84a8dbd46f4f03751e4c, type: 3}
-  - {fileID: 21300000, guid: f39b83afbde9741ddbecc86a65ecaeb4, type: 3}
+  - {fileID: 21300000, guid: 7c7ab9d3f88da493eb1e6a22c1b1a7a3, type: 3}
   - {fileID: 21300000, guid: 70fe2c876c240451fac11d5e7941653b, type: 3}
   - {fileID: 21300000, guid: ad9ab2b03573344deabc16f1d9ed3295, type: 3}
   - {fileID: 21300000, guid: 87f23cd9a3f9245ac9b538c3d7f8860b, type: 3}
@@ -423,3 +423,4 @@ MonoBehaviour:
   _maximumSpeed: 3
   _delayTime: 0.2
   _rowboat: {fileID: 3747141280413476372}
+  _isEmpty: 0

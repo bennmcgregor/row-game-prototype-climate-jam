@@ -6,6 +6,8 @@ using Yarn.Unity;
 
 public class SlideShowDialogueRunner : MonoBehaviour
 {
+    public Action NextSlideCalled;
+
     [SerializeField] private SlideShow _slideShow;
     [SerializeField] private DialogueRunner _dialogueRunner;
     [SerializeField] private string[] _dialogueNodeNames;
@@ -22,5 +24,6 @@ public class SlideShowDialogueRunner : MonoBehaviour
         _dialogueRunner.Stop();
         _dialogueRunner.StartDialogue(_dialogueNodeNames[_currentIndex]);
         _currentIndex++;
+        NextSlideCalled?.Invoke();
     }
 }

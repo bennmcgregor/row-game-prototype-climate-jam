@@ -12,9 +12,9 @@ public class InputManager : MonoBehaviour
     [YarnCommand("deactivate_input")]
     public void DeactivateInput()
     {
+        _rowboat.DeactivateInput();
         foreach (var playerInput in _playerInputs)
         {
-            _rowboat.DeactivateInput();
             playerInput.DeactivateInput();
         }
     }

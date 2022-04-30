@@ -7,7 +7,7 @@ public class AnimatedImage : MonoBehaviour
 {
     [SerializeField] private float _frameRate;
     [SerializeField] private Sprite[] _sprites;
-    [SerializeField] private Image _image;
+    [SerializeField] private SpriteRenderer _spriteRenderer;
     private int _index = 0;
     private float _timer = 0;
 
@@ -16,7 +16,7 @@ public class AnimatedImage : MonoBehaviour
         if ((_timer += Time.deltaTime) >= (1f / _frameRate))
         {
             _timer = 0;
-            _image.sprite = _sprites[_index];
+            _spriteRenderer.sprite = _sprites[_index];
             _index = (_index + 1) % _sprites.Length;
         }
     }

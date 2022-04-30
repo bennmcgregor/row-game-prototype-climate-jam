@@ -18,7 +18,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Gameplay/Scene2.unity
     guid: c088ccc8e3939294a82d78b9af889d01
   - enabled: 0
-    path: Assets/Scenes/Cutscenes/Scene3.unity
+    path: Assets/Scenes/Cutscenes/Scene3-old.unity
     guid: 747e2d29b02d345a69a1b2dc33dc098c
   - enabled: 0
     path: Assets/Scenes/Cutscenes/CreditsScene.unity
