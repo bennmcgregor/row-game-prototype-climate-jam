@@ -11,8 +11,13 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        TriggerDialogue();
+        Destroy(gameObject);
+    }
+
+    public void TriggerDialogue()
+    {
         _inputManager.DeactivateInput();
         _dialogueRunner.StartDialogue(_nodeName);
-        Destroy(gameObject);
     }
 }

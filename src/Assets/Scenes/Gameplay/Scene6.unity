@@ -73041,7 +73041,7 @@ GameObject:
   - component: {fileID: 921973493}
   - component: {fileID: 921973492}
   - component: {fileID: 921973491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Tilemap_collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
