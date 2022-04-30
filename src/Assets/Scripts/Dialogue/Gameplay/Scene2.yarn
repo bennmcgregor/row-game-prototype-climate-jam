@@ -2,11 +2,11 @@
 tags:
 ---
 Nico: These are insults that must be added.
-<<activate_input InputManager>>
+<<activate_input GameplayControllers>>
 ===
 title: Scene2Reminder
 tags:
 ---
 Didn't you row all the way here to take water for your family?
-<<activate_input InputManager>>
+<<activate_input GameplayControllers>>
 ===

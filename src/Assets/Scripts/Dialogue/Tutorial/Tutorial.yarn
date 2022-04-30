@@ -1,23 +1,23 @@
 ﻿title: Tutorial1Basics
 tags:
 ---
-<<deactivate_input InputManager>>
+<<deactivate_input GameplayControllers>>
 Welcome to your rowboat!
 To take strokes, hold down and release the spacebar. You can reverse direction by holding down left shift, but moving backwards is slower.
 The mark of a good rower is long, consistently-timed strokes. This is essential for moving the boat quickly. Consistent timing is especially crucial when you're rowing with someone else!
 Also, make sure not to keep your oars in the water for too long after the stroke, the drag will slow you down.
-<<activate_input InputManager>>
+<<activate_input GameplayControllers>>
 ===
 title: Tutorial2Steering
 tags:
 ---
 You can steer your rowboat by holding down W/S or up/down. The boat will only steer while your oars are in the water!
-<<activate_input InputManager>>
+<<activate_input GameplayControllers>>
 ===
 title: Tutorial3Interaction
 tags:
 ---
 To interact with items and people, press the E key.
 Try picking up this plastic bag! Once you've picked it up, you can view it in your inventory by pressing left tab.
-<<activate_input InputManager>>
+<<activate_input GameplayControllers>>
 ===
