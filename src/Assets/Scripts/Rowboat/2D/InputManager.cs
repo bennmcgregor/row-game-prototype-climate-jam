@@ -7,21 +7,14 @@ using Yarn.Unity;
 public class InputManager : MonoBehaviour
 {
     [SerializeField] private List<PlayerInput> _playerInputs;
-
-    // private void Start()
-    // {
-    //     var playerInputs = FindObjectsOfType<PlayerInput>();
-    //     foreach (var playerInput in playerInputs)
-    //     {
-    //         _playerInputs.Add(playerInput);
-    //     }
-    // }
+    [SerializeField] private RowBoat2D _rowboat;
 
     [YarnCommand("deactivate_input")]
     public void DeactivateInput()
     {
         foreach (var playerInput in _playerInputs)
         {
+            _rowboat.DeactivateInput();
             playerInput.DeactivateInput();
         }
     }

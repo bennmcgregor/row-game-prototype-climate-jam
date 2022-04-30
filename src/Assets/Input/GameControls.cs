@@ -28,12 +28,21 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
             ""id"": ""9ea4a343-59ec-41bf-b12f-7d2f88525c3c"",
             ""actions"": [
                 {
-                    ""name"": ""Catch"",
+                    ""name"": ""CatchPress"",
                     ""type"": ""Button"",
                     ""id"": ""422b4de6-a9cd-4b0b-9f2f-ff29ff08c972"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CatchRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""4598b695-8247-4a21-95bf-a82d3a277ed0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -46,30 +55,57 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RudderUp"",
+                    ""name"": ""RudderUpPress"",
                     ""type"": ""Button"",
                     ""id"": ""bbb434c4-eaea-46e9-aee2-df03574d2e65"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RudderDown"",
+                    ""name"": ""RudderUpRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""c4af8940-d6e2-4515-b694-6f7364e12936"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RudderDownPress"",
                     ""type"": ""Button"",
                     ""id"": ""6c3f8857-a884-44aa-9fb6-62ed11018266"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Reverse"",
+                    ""name"": ""RudderDownRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""dd09be05-ec8c-423b-a098-2ac3ae0d53ab"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReversePress"",
                     ""type"": ""Button"",
                     ""id"": ""7ace1d4d-477a-48b0-95b6-8df52609edda"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReverseRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4118d9f-d7e0-4f4a-ac92-1f24a2d03e15"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""initialStateCheck"": false
                 },
                 {
@@ -90,7 +126,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Catch"",
+                    ""action"": ""CatchPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -112,7 +148,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RudderUp"",
+                    ""action"": ""RudderUpPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -123,7 +159,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RudderUp"",
+                    ""action"": ""RudderUpPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -134,7 +170,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RudderDown"",
+                    ""action"": ""RudderDownPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -145,7 +181,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RudderDown"",
+                    ""action"": ""RudderDownPress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -156,7 +192,7 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Reverse"",
+                    ""action"": ""ReversePress"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -170,6 +206,72 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b224c7e3-d346-462a-8d7d-7372a48b5419"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CatchRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f7bb491-724d-4bf7-8eb9-28597dca1d23"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RudderUpRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""58a43044-93d5-4580-bc7e-6f0909ff4b39"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RudderUpRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""103f4dae-bb3e-43db-a555-9a3cf67dd6d7"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RudderDownRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cfd616b3-a1ab-4038-a0a0-226298c84d8e"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RudderDownRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""57a77c79-b0f3-4200-897d-ecdcc3eb6806"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReverseRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -178,11 +280,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
 }");
         // RowingTest
         m_RowingTest = asset.FindActionMap("RowingTest", throwIfNotFound: true);
-        m_RowingTest_Catch = m_RowingTest.FindAction("Catch", throwIfNotFound: true);
+        m_RowingTest_CatchPress = m_RowingTest.FindAction("CatchPress", throwIfNotFound: true);
+        m_RowingTest_CatchRelease = m_RowingTest.FindAction("CatchRelease", throwIfNotFound: true);
         m_RowingTest_Inventory = m_RowingTest.FindAction("Inventory", throwIfNotFound: true);
-        m_RowingTest_RudderUp = m_RowingTest.FindAction("RudderUp", throwIfNotFound: true);
-        m_RowingTest_RudderDown = m_RowingTest.FindAction("RudderDown", throwIfNotFound: true);
-        m_RowingTest_Reverse = m_RowingTest.FindAction("Reverse", throwIfNotFound: true);
+        m_RowingTest_RudderUpPress = m_RowingTest.FindAction("RudderUpPress", throwIfNotFound: true);
+        m_RowingTest_RudderUpRelease = m_RowingTest.FindAction("RudderUpRelease", throwIfNotFound: true);
+        m_RowingTest_RudderDownPress = m_RowingTest.FindAction("RudderDownPress", throwIfNotFound: true);
+        m_RowingTest_RudderDownRelease = m_RowingTest.FindAction("RudderDownRelease", throwIfNotFound: true);
+        m_RowingTest_ReversePress = m_RowingTest.FindAction("ReversePress", throwIfNotFound: true);
+        m_RowingTest_ReverseRelease = m_RowingTest.FindAction("ReverseRelease", throwIfNotFound: true);
         m_RowingTest_Interact = m_RowingTest.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -243,21 +349,29 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     // RowingTest
     private readonly InputActionMap m_RowingTest;
     private IRowingTestActions m_RowingTestActionsCallbackInterface;
-    private readonly InputAction m_RowingTest_Catch;
+    private readonly InputAction m_RowingTest_CatchPress;
+    private readonly InputAction m_RowingTest_CatchRelease;
     private readonly InputAction m_RowingTest_Inventory;
-    private readonly InputAction m_RowingTest_RudderUp;
-    private readonly InputAction m_RowingTest_RudderDown;
-    private readonly InputAction m_RowingTest_Reverse;
+    private readonly InputAction m_RowingTest_RudderUpPress;
+    private readonly InputAction m_RowingTest_RudderUpRelease;
+    private readonly InputAction m_RowingTest_RudderDownPress;
+    private readonly InputAction m_RowingTest_RudderDownRelease;
+    private readonly InputAction m_RowingTest_ReversePress;
+    private readonly InputAction m_RowingTest_ReverseRelease;
     private readonly InputAction m_RowingTest_Interact;
     public struct RowingTestActions
     {
         private @GameControls m_Wrapper;
         public RowingTestActions(@GameControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Catch => m_Wrapper.m_RowingTest_Catch;
+        public InputAction @CatchPress => m_Wrapper.m_RowingTest_CatchPress;
+        public InputAction @CatchRelease => m_Wrapper.m_RowingTest_CatchRelease;
         public InputAction @Inventory => m_Wrapper.m_RowingTest_Inventory;
-        public InputAction @RudderUp => m_Wrapper.m_RowingTest_RudderUp;
-        public InputAction @RudderDown => m_Wrapper.m_RowingTest_RudderDown;
-        public InputAction @Reverse => m_Wrapper.m_RowingTest_Reverse;
+        public InputAction @RudderUpPress => m_Wrapper.m_RowingTest_RudderUpPress;
+        public InputAction @RudderUpRelease => m_Wrapper.m_RowingTest_RudderUpRelease;
+        public InputAction @RudderDownPress => m_Wrapper.m_RowingTest_RudderDownPress;
+        public InputAction @RudderDownRelease => m_Wrapper.m_RowingTest_RudderDownRelease;
+        public InputAction @ReversePress => m_Wrapper.m_RowingTest_ReversePress;
+        public InputAction @ReverseRelease => m_Wrapper.m_RowingTest_ReverseRelease;
         public InputAction @Interact => m_Wrapper.m_RowingTest_Interact;
         public InputActionMap Get() { return m_Wrapper.m_RowingTest; }
         public void Enable() { Get().Enable(); }
@@ -268,21 +382,33 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_RowingTestActionsCallbackInterface != null)
             {
-                @Catch.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
-                @Catch.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
-                @Catch.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatch;
+                @CatchPress.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchPress;
+                @CatchPress.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchPress;
+                @CatchPress.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchPress;
+                @CatchRelease.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchRelease;
+                @CatchRelease.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchRelease;
+                @CatchRelease.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnCatchRelease;
                 @Inventory.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
                 @Inventory.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
                 @Inventory.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInventory;
-                @RudderUp.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUp;
-                @RudderUp.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUp;
-                @RudderUp.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUp;
-                @RudderDown.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDown;
-                @RudderDown.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDown;
-                @RudderDown.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDown;
-                @Reverse.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
-                @Reverse.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
-                @Reverse.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverse;
+                @RudderUpPress.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpPress;
+                @RudderUpPress.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpPress;
+                @RudderUpPress.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpPress;
+                @RudderUpRelease.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpRelease;
+                @RudderUpRelease.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpRelease;
+                @RudderUpRelease.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderUpRelease;
+                @RudderDownPress.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownPress;
+                @RudderDownPress.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownPress;
+                @RudderDownPress.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownPress;
+                @RudderDownRelease.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownRelease;
+                @RudderDownRelease.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownRelease;
+                @RudderDownRelease.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnRudderDownRelease;
+                @ReversePress.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReversePress;
+                @ReversePress.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReversePress;
+                @ReversePress.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReversePress;
+                @ReverseRelease.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverseRelease;
+                @ReverseRelease.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverseRelease;
+                @ReverseRelease.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnReverseRelease;
                 @Interact.started -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_RowingTestActionsCallbackInterface.OnInteract;
@@ -290,21 +416,33 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
             m_Wrapper.m_RowingTestActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Catch.started += instance.OnCatch;
-                @Catch.performed += instance.OnCatch;
-                @Catch.canceled += instance.OnCatch;
+                @CatchPress.started += instance.OnCatchPress;
+                @CatchPress.performed += instance.OnCatchPress;
+                @CatchPress.canceled += instance.OnCatchPress;
+                @CatchRelease.started += instance.OnCatchRelease;
+                @CatchRelease.performed += instance.OnCatchRelease;
+                @CatchRelease.canceled += instance.OnCatchRelease;
                 @Inventory.started += instance.OnInventory;
                 @Inventory.performed += instance.OnInventory;
                 @Inventory.canceled += instance.OnInventory;
-                @RudderUp.started += instance.OnRudderUp;
-                @RudderUp.performed += instance.OnRudderUp;
-                @RudderUp.canceled += instance.OnRudderUp;
-                @RudderDown.started += instance.OnRudderDown;
-                @RudderDown.performed += instance.OnRudderDown;
-                @RudderDown.canceled += instance.OnRudderDown;
-                @Reverse.started += instance.OnReverse;
-                @Reverse.performed += instance.OnReverse;
-                @Reverse.canceled += instance.OnReverse;
+                @RudderUpPress.started += instance.OnRudderUpPress;
+                @RudderUpPress.performed += instance.OnRudderUpPress;
+                @RudderUpPress.canceled += instance.OnRudderUpPress;
+                @RudderUpRelease.started += instance.OnRudderUpRelease;
+                @RudderUpRelease.performed += instance.OnRudderUpRelease;
+                @RudderUpRelease.canceled += instance.OnRudderUpRelease;
+                @RudderDownPress.started += instance.OnRudderDownPress;
+                @RudderDownPress.performed += instance.OnRudderDownPress;
+                @RudderDownPress.canceled += instance.OnRudderDownPress;
+                @RudderDownRelease.started += instance.OnRudderDownRelease;
+                @RudderDownRelease.performed += instance.OnRudderDownRelease;
+                @RudderDownRelease.canceled += instance.OnRudderDownRelease;
+                @ReversePress.started += instance.OnReversePress;
+                @ReversePress.performed += instance.OnReversePress;
+                @ReversePress.canceled += instance.OnReversePress;
+                @ReverseRelease.started += instance.OnReverseRelease;
+                @ReverseRelease.performed += instance.OnReverseRelease;
+                @ReverseRelease.canceled += instance.OnReverseRelease;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -314,11 +452,15 @@ public partial class @GameControls : IInputActionCollection2, IDisposable
     public RowingTestActions @RowingTest => new RowingTestActions(this);
     public interface IRowingTestActions
     {
-        void OnCatch(InputAction.CallbackContext context);
+        void OnCatchPress(InputAction.CallbackContext context);
+        void OnCatchRelease(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
-        void OnRudderUp(InputAction.CallbackContext context);
-        void OnRudderDown(InputAction.CallbackContext context);
-        void OnReverse(InputAction.CallbackContext context);
+        void OnRudderUpPress(InputAction.CallbackContext context);
+        void OnRudderUpRelease(InputAction.CallbackContext context);
+        void OnRudderDownPress(InputAction.CallbackContext context);
+        void OnRudderDownRelease(InputAction.CallbackContext context);
+        void OnReversePress(InputAction.CallbackContext context);
+        void OnReverseRelease(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }
