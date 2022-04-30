@@ -16,13 +16,15 @@ public class Inv : MonoBehaviour
         InventoryCanvas.SetActive(isOpen);
     }
 
-    public void Update()
-    {
-
-    }
     private List<Item> itemList;
     private const int MAX_ITEMS = 10;
     public GameObject itemBase;
+
+    private void Awake()
+    {
+        // retain state across scenes
+        DontDestroyOnLoad(this.gameObject);
+    }
 
     public Inv()
     {
