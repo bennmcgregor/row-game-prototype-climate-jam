@@ -9,8 +9,9 @@ public class Interactable : MonoBehaviour
     public GameObject canvas;
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
+        ChildUpdate();
         float distance = Vector3.Distance(transform.position, boat.transform.position);
         if (Mathf.Abs(distance) < Mathf.Abs(minDistance))
         {
@@ -32,6 +33,11 @@ public class Interactable : MonoBehaviour
     }
 
     protected virtual void Action ()
+    {
+        return;
+    }
+
+    protected virtual void ChildUpdate ()
     {
         return;
     }
