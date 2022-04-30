@@ -12,7 +12,7 @@ public class CutsceneController : MonoBehaviour
     {
         _slideShow.OnSlideshowFinished += () => _sceneLoader.ActivateNextScene();
         var foundSceneLoaders = FindObjectsOfType<SceneLoader>();
-        // _sceneLoader = foundSceneLoaders[0];
+        _sceneLoader = foundSceneLoaders[0];
     }
 
     private void Start()
@@ -23,6 +23,6 @@ public class CutsceneController : MonoBehaviour
         _slideShow.StartSlideshow();
         
         // start asynchronously loading the next scene
-        // _sceneLoader.LoadNextScene();
+        _sceneLoader.LoadNextScene();
     }
 }

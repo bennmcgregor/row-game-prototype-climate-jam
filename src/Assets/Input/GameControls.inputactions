@@ -6,12 +6,21 @@
             "id": "9ea4a343-59ec-41bf-b12f-7d2f88525c3c",
             "actions": [
                 {
-                    "name": "Catch",
+                    "name": "CatchPress",
                     "type": "Button",
                     "id": "422b4de6-a9cd-4b0b-9f2f-ff29ff08c972",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CatchRelease",
+                    "type": "Button",
+                    "id": "4598b695-8247-4a21-95bf-a82d3a277ed0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 },
                 {
@@ -24,30 +33,57 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RudderUp",
+                    "name": "RudderUpPress",
                     "type": "Button",
                     "id": "bbb434c4-eaea-46e9-aee2-df03574d2e65",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RudderDown",
+                    "name": "RudderUpRelease",
+                    "type": "Button",
+                    "id": "c4af8940-d6e2-4515-b694-6f7364e12936",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RudderDownPress",
                     "type": "Button",
                     "id": "6c3f8857-a884-44aa-9fb6-62ed11018266",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reverse",
+                    "name": "RudderDownRelease",
+                    "type": "Button",
+                    "id": "dd09be05-ec8c-423b-a098-2ac3ae0d53ab",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReversePress",
                     "type": "Button",
                     "id": "7ace1d4d-477a-48b0-95b6-8df52609edda",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Press(behavior=2)",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ReverseRelease",
+                    "type": "Button",
+                    "id": "b4118d9f-d7e0-4f4a-ac92-1f24a2d03e15",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press(behavior=1)",
                     "initialStateCheck": false
                 },
                 {
@@ -68,7 +104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Catch",
+                    "action": "CatchPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -90,7 +126,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RudderUp",
+                    "action": "RudderUpPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -101,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RudderUp",
+                    "action": "RudderUpPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -112,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RudderDown",
+                    "action": "RudderDownPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -123,7 +159,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RudderDown",
+                    "action": "RudderDownPress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -134,7 +170,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reverse",
+                    "action": "ReversePress",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -146,6 +182,72 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b224c7e3-d346-462a-8d7d-7372a48b5419",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CatchRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6f7bb491-724d-4bf7-8eb9-28597dca1d23",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RudderUpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "58a43044-93d5-4580-bc7e-6f0909ff4b39",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RudderUpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "103f4dae-bb3e-43db-a555-9a3cf67dd6d7",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RudderDownRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cfd616b3-a1ab-4038-a0a0-226298c84d8e",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RudderDownRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "57a77c79-b0f3-4200-897d-ecdcc3eb6806",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ReverseRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

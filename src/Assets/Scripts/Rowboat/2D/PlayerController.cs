@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     private float _timeDelta;
     private float _force;
     private float _spamTimer;
+    private bool _isPressingCatch = false;
 
     public float CatchPosition => _catchPosition;
     public float FinishPosition => _finishPosition;
@@ -44,33 +45,40 @@ public class PlayerController : MonoBehaviour
         return _slider.Value;
     }
 
-    public void OnCatch()
+    public void DeactivateInput()
     {
-        switch (_stateMachine.State)
+        OnCatchRelease();
+        _isPressingCatch = false;
+    }
+
+    public void OnCatchPress()
+    {
+        if (!_isPressingCatch && _spamTimer > _playerRowboatParams.SpamTimeThreshold)
         {
-            case RowingState.DRIVE:
-                UpdateFinishPosition(GetSliderPosition());
-                _velocity = _playerRowboatParams.RecoverySpeed;
-                _force = 0;
-                _stateMachine.StateTransition();
-                break;
-            case RowingState.RECOVERY:
-                if (_spamTimer > _playerRowboatParams.SpamTimeThreshold)
-                {
-                    UpdateCatchPosition(GetSliderPosition());
-                    float predictedDriveLength = _catchPosition - _finishPosition;
-                    _currentForceCurve = new ForceCurve(
-                        predictedDriveLength,
-                        _playerRowboatParams.RecoverySpeed,
-                        _playerRowboatParams.MaxAcceleration,
-                        predictedDriveLength / _playerRowboatParams.DriveSpeed);
-                    UpdateVelocityForDrive(0);
-                    _spamTimer = 0;
-                    _stateMachine.StateTransition();
-                }
-                break;
-            default:
-                break;
+            UpdateCatchPosition(GetSliderPosition());
+            float predictedDriveLength = _catchPosition - _finishPosition;
+            _currentForceCurve = new ForceCurve(
+                predictedDriveLength,
+                _playerRowboatParams.RecoverySpeed,
+                _playerRowboatParams.MaxAcceleration,
+                predictedDriveLength / _playerRowboatParams.DriveSpeed);
+            UpdateVelocityForDrive(0);
+            _spamTimer = 0;
+            _stateMachine.StateTransition();
+
+            _isPressingCatch = true;
+        }
+    }
+
+    public void OnCatchRelease()
+    {
+        if (_isPressingCatch)
+        {
+            UpdateFinishPosition(GetSliderPosition());
+            _velocity = _playerRowboatParams.RecoverySpeed;
+            _force = 0;
+            _stateMachine.StateTransition();
+            _isPressingCatch = false;
         }
     }
 

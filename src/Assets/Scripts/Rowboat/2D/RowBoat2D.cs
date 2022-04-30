@@ -23,6 +23,9 @@ public class RowBoat2D : MonoBehaviour
     private float _rudderTimer = 0f;
     private bool _hasMovedVerticallyOnThisStroke = false;
     private bool _hasStoppedBoatOnThisStroke = false;
+    private bool _isPressingRudderUp = false;
+    private bool _isPressingRudderDown = false;
+    private bool _isPressingReverse = false;
 
     // multiplies the force from the player based on how in time the two rowers are.
     private float _timingMultiplier;
@@ -37,19 +40,69 @@ public class RowBoat2D : MonoBehaviour
         _directionStateMachine = new DirectionStateMachine(DirectionState.FORWARD);
     }
 
-    public void OnRudderUp()
+    public void DeactivateInput()
     {
-        _rudderStateMachine.OnRudderUp();
+        _playerController.DeactivateInput();
+        OnRudderUpRelease();
+        OnRudderDownRelease();
+        OnReverseRelease();
+        _isPressingRudderUp = false;
+        _isPressingRudderDown = false;
+        _isPressingReverse = false;
     }
 
-    public void OnRudderDown()
+    public void OnRudderUpPress()
     {
-        _rudderStateMachine.OnRudderDown();
+        if (!_isPressingRudderUp)
+        {
+            _rudderStateMachine.OnRudderUp();
+            _isPressingRudderUp = true;
+        }
     }
 
-    public void OnReverse()
+    public void OnRudderUpRelease()
     {
-        _directionStateMachine.StateTransition();
+        if (_isPressingRudderUp)
+        {
+            _rudderStateMachine.OnRudderUp();
+            _isPressingRudderUp = false;
+        }
+    }
+
+    public void OnRudderDownPress()
+    {
+        if (!_isPressingRudderDown)
+        {
+            _rudderStateMachine.OnRudderDown();
+            _isPressingRudderDown = true;
+        }
+    }
+
+    public void OnRudderDownRelease()
+    {
+        if (_isPressingRudderDown)
+        {
+            _rudderStateMachine.OnRudderDown();
+            _isPressingRudderDown = false;
+        }
+    }
+
+    public void OnReversePress()
+    {
+        if (!_isPressingReverse)
+        {
+            _directionStateMachine.StateTransition();
+            _isPressingReverse = true;
+        }
+    }
+
+    public void OnReverseRelease()
+    {
+        if (_isPressingReverse)
+        {
+            _directionStateMachine.StateTransition();
+            _isPressingReverse = false;
+        }
     }
 
     private void FixedUpdate()
@@ -111,11 +164,14 @@ public class RowBoat2D : MonoBehaviour
                 _hasDriveEnded = true;
                 _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
                 _rudderTimer = 0;
-                _hasStoppedBoatOnThisStroke = false;
             }
             if (_hasMovedVerticallyOnThisStroke)
             {
                 _hasMovedVerticallyOnThisStroke = false;
+            }
+            if (_hasStoppedBoatOnThisStroke)
+            {
+                _hasStoppedBoatOnThisStroke = false;
             }
         }
 

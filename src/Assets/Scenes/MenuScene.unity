@@ -154,7 +154,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sceneOrder:
   - MenuScene
-  - Scene3
+  - Scene1
+  - Scene2
 --- !u!4 &611360659
 Transform:
   m_ObjectHideFlags: 0
