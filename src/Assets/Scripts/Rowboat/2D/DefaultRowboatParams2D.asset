@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxPullForce: 15
   MaxPushForce: 5
-  OarDragForce: 30
+  OarDragScalingFactor: 0.05
   StoppingForce: 5
   InPerfectTimeThreshhold: 0.02
   InTimeThreshhold: 0.035
@@ -24,4 +24,4 @@ MonoBehaviour:
   RudderMotionThreshhold: 0.2
   RudderTimerThreshhold: 0.5
   RudderAccelerationThreshhold: 0.09
-  StoppingSpeedThreshhold: 0.1
+  StoppingSpeedThreshhold: 0.5

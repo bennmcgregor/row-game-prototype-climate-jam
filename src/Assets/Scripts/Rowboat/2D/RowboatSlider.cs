@@ -69,6 +69,15 @@ public class RowboatSlider : MonoBehaviour
         float scale = (float) newScale - 0.01f;
         float unrounded = (scale / 100f) * (Math.Abs(_value) - 100f) + scale;
         int idx = (int) Math.Floor(unrounded); // floor so that the sprites are evenly distributed
+        if (idx > newScale - 1)
+        {
+            idx = newScale - 1;
+        }
+        else if (idx < 0)
+        {
+            idx = 0;
+        }
+        
         if (_rowboat.DirectionState == DirectionState.REVERSE)
         {
             return newScale - 1 - idx;
