@@ -15,6 +15,7 @@ public class RowBoat2D : MonoBehaviour
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private NPCController _npcController;
     [SerializeField] private Rigidbody2D _rigidbody2D;
+    [SerializeField] private LayerMask _verticalMovementMask;
 
     private bool _hasPlayerCatched = false;
     private bool _hasDriveEnded = false;
@@ -151,7 +152,6 @@ public class RowBoat2D : MonoBehaviour
                 _playerController.CurrentState == RowingState.DRIVE &&
                 Math.Abs(boatForceMultiplier) > 0)
             {
-                UnityEngine.Debug.Log("ApplyOarDrag");
                 _rigidbody2D.AddForce(
                     -_rigidbody2D.velocity*_rigidbody2D.mass*_rowboatParams2D.OarDragScalingFactor,
                     ForceMode2D.Impulse
@@ -172,6 +172,27 @@ public class RowBoat2D : MonoBehaviour
             directionMultiplier = Vector2.down;
         }
 
-        _rigidbody2D.MovePosition(directionMultiplier + transform.position);
+        Vector3 targetPosition = directionMultiplier + transform.position;
+
+        if (!Physics2D.OverlapCircle(targetPosition, .2f, _verticalMovementMask))
+        {
+            StartCoroutine(MoveVerticallyCoroutine(directionMultiplier, targetPosition));
+        }
+    }
+
+    private IEnumerator MoveVerticallyCoroutine(Vector3 directionMultiplier, Vector3 targetPosition)
+    {
+        float timer = 0;
+        while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatParams2D.MaxVerticalMoveTime)
+        {
+            timer += Time.deltaTime;
+            Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
+            transform.position = Vector3.MoveTowards(
+                transform.position,
+                newYPos,
+                _rowboatParams2D.VerticalMoveSpeed * Time.deltaTime
+            );
+            yield return null;
+        }
     }
 }

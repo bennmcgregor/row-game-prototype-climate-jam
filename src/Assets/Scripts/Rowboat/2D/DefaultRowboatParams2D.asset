@@ -25,3 +25,5 @@ MonoBehaviour:
   RudderTimerThreshhold: 0.5
   RudderAccelerationThreshhold: 0.09
   StoppingSpeedThreshhold: 0.5
+  VerticalMoveSpeed: 5
+  MaxVerticalMoveTime: 1

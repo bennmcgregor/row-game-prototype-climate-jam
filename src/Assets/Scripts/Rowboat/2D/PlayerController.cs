@@ -77,14 +77,14 @@ public class PlayerController : MonoBehaviour
     private void UpdateCatchPosition(float pos)
     {
         _catchPosition = pos;
-        UnityEngine.Debug.Log($"new _catchPosition = {_catchPosition}");
+        // UnityEngine.Debug.Log($"new _catchPosition = {_catchPosition}");
         OnCatchPositionUpdated?.Invoke(_catchPosition);
     }
 
     private void UpdateFinishPosition(float pos)
     {
         _finishPosition = pos;
-        UnityEngine.Debug.Log($"new _finishPosition = {_finishPosition}");
+        // UnityEngine.Debug.Log($"new _finishPosition = {_finishPosition}");
         OnFinishPositionUpdated?.Invoke(_finishPosition);
     }
 

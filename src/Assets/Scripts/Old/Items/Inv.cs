@@ -67,7 +67,6 @@ public class Inv : MonoBehaviour
             Debug.Log(i.name);
             GameObject cloned = Instantiate(itemBase, Vector3.zero, Quaternion.identity, GameObject.Find("Content").transform);
             cloned.transform.localPosition = Vector3.zero;
-            cloned.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = i.name;
             cloned.transform.Find("Image").GetComponent<Image>().sprite = i.sprite;
         }
     }

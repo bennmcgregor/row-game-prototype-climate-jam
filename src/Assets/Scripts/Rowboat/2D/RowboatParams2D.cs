@@ -19,4 +19,7 @@ public class RowboatParams2D : ScriptableObject
     public float RudderAccelerationThreshhold = 1f; // the minimum acceleration of the player before the boat moves
 
     public float StoppingSpeedThreshhold = 0.5f;
+
+    public float VerticalMoveSpeed = 5f;
+    public float MaxVerticalMoveTime = 0.5f;
 }
