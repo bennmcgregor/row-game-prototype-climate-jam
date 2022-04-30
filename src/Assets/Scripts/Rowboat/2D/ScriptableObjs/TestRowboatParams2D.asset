@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9d1bbfb8992b4d318f4f686924194de, type: 3}
+  m_Name: TestRowboatParams2D
+  m_EditorClassIdentifier: 
+  MaxPullForce: 15
+  MaxPushForce: 15
+  OarDragScalingFactor: 0.05
+  StoppingForce: 5
+  InPerfectTimeThreshhold: 0.02
+  InTimeThreshhold: 0.035
+  NoBowEffectTimingMultiplier: 1
+  PerfectTimingMultiplier: 4
+  InTimeTimingMultiplier: 1.5
+  RudderMotionThreshhold: 0.2
+  RudderTimerThreshhold: 0.5
+  RudderAccelerationThreshhold: 0.09
+  StoppingSpeedThreshhold: 0.5
+  VerticalMoveSpeed: 5
+  MaxVerticalMoveTime: 1
