@@ -204,6 +204,11 @@ public class RowBoat2D : MonoBehaviour
             boatForceMultiplier *= -1;
         }
 
+        if (double.IsNaN(boatForceMultiplier))
+        {
+            boatForceMultiplier = 0;
+        }
+
         if (!_hasStoppedBoatOnThisStroke)
         {
             // oars left in the water at the finish for too long
