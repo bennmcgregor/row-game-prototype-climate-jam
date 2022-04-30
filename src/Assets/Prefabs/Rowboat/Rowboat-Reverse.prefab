@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 3747141280413476372}
   - component: {fileID: 3747141280413476371}
   m_Layer: 0
-  m_Name: Rowboat
+  m_Name: Rowboat-Reverse
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

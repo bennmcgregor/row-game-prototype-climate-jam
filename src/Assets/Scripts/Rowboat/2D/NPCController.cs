@@ -13,6 +13,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private float _maximumSpeed = 2.5f;
     [SerializeField] private float _delayTime = 0.2f;
     [SerializeField] private RowBoat2D _rowboat;
+    [SerializeField] private bool _isEmpty = false;
 
     private RowingStateMachine _stateMachine;
 
@@ -40,7 +41,10 @@ public class NPCController : MonoBehaviour
         _playerMostRecentFinishPosition = _playerController.FinishPosition;
         
         // start the follow logic
-        StartCoroutine(FollowPlayer());
+        if (!_isEmpty)
+        {
+            StartCoroutine(FollowPlayer());
+        }
     }
 
     private float GetSliderPosition()

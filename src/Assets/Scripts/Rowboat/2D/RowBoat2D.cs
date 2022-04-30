@@ -111,8 +111,11 @@ public class RowBoat2D : MonoBehaviour
                 _hasDriveEnded = true;
                 _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
                 _rudderTimer = 0;
-                _hasMovedVerticallyOnThisStroke = false;
                 _hasStoppedBoatOnThisStroke = false;
+            }
+            if (_hasMovedVerticallyOnThisStroke)
+            {
+                _hasMovedVerticallyOnThisStroke = false;
             }
         }
 
