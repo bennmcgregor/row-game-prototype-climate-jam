@@ -31,6 +31,7 @@ public class GameplaySceneController : MonoBehaviour
 
     private void OnDestroy()
     {
+        _sceneLoader = FindObjectOfType<SceneLoader>();
         _sceneLoader.OnSceneExitStarted -= StartFadeOut;
     }
 
