@@ -12,17 +12,17 @@ public class CutsceneController : MonoBehaviour
     private void Awake()
     {
         _slideShow.OnSlideshowFinished += () => _sceneLoader.ActivateNextScene();
-        
     }
 
     private void Start()
     {
-        // play audio
-        _audioSource.Play();
+        // fade in audio
+        StartCoroutine(AudioHelper.FadeIn(_audioSource, 5));
         // start slideshow
         _slideShow.StartSlideshow();
 
         _sceneLoader = FindObjectOfType<SceneLoader>();
+        _sceneLoader.OnSceneExitStarted += StartFadeOut;
         
         // start asynchronously loading the next scene
         if (_sceneLoader != null)
@@ -37,5 +37,15 @@ public class CutsceneController : MonoBehaviour
         {
             Debug.Log("SceneLoader not found");
         }
+    }
+
+    private void OnDestroy()
+    {
+        _sceneLoader.OnSceneExitStarted -= StartFadeOut;
+    }
+
+    private void StartFadeOut()
+    {
+        StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
     }
 }

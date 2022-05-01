@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slideShow: {fileID: 439453200}
   _audioSource: {fileID: 2117017560}
+  _numberOfScenesToSkip: 0
 --- !u!4 &1242237218
 Transform:
   m_ObjectHideFlags: 0
@@ -300,7 +301,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: e3ca1ec5989f5414fab454d4b1496293, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -528,6 +529,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8509971047616583094, guid: fe7091900de604bed89c133353fbeb3f,
+        type: 3}
+      propertyPath: startAutomatically
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe7091900de604bed89c133353fbeb3f, type: 3}

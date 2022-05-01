@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 public class SceneLoader : MonoBehaviour
 {
+    public Action OnSceneExitStarted;
+
     [SerializeField] public string[] _sceneOrder;
+    [SerializeField] private Animator _transition;
 
     private int _nextSceneIdx = 1;
     private bool _shouldActivateNextScene = false;
@@ -51,6 +55,14 @@ public class SceneLoader : MonoBehaviour
             {
                 if (_shouldActivateNextScene)
                 {
+                    // tell listeners to start their exit procedures (fade audio out)
+                    OnSceneExitStarted?.Invoke();
+                    yield return new WaitForSeconds(1);
+
+                    // start crossfade
+                    _transition.SetTrigger("Start");
+                    yield return new WaitForSeconds(1);
+
                     // Activate the Scene
                     asyncOperation.allowSceneActivation = true;
                     _shouldActivateNextScene = false;

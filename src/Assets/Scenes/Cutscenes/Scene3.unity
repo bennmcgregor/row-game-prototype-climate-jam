@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slideShow: {fileID: 439453200}
   _audioSource: {fileID: 2117017560}
+  _numberOfScenesToSkip: 0
 --- !u!4 &1242237218
 Transform:
   m_ObjectHideFlags: 0
@@ -277,7 +278,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: c8f0a6fe0bbe5430e8c98562fdbe7239, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

@@ -12,11 +12,11 @@ public class GameplaySceneController : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log("Here");
         // play audio
-        _audioSource.Play();
+        StartCoroutine(AudioHelper.FadeIn(_audioSource, 5));
 
         _sceneLoader = FindObjectOfType<SceneLoader>();
+        _sceneLoader.OnSceneExitStarted += StartFadeOut;
         
         // start asynchronously loading the next scene
         if (_sceneLoader != null && !_hasBranchingInNextScene)
@@ -27,6 +27,16 @@ public class GameplaySceneController : MonoBehaviour
         {
             Debug.Log("SceneLoader not found");
         }
+    }
+
+    private void OnDestroy()
+    {
+        _sceneLoader.OnSceneExitStarted -= StartFadeOut;
+    }
+
+    private void StartFadeOut()
+    {
+        StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
     }
 
     [YarnCommand("load_branching_scene")]

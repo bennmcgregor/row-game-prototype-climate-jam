@@ -389,7 +389,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 3d9aa34992ad2458ab698e5ddb4028a2, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -92542,7 +92542,7 @@ PrefabInstance:
     - target: {fileID: 4848493545823208130, guid: d6f276e29d922e844b20fea1e55aace3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 163.22
+      value: 166.32
       objectReference: {fileID: 0}
     - target: {fileID: 4848493545823208130, guid: d6f276e29d922e844b20fea1e55aace3,
         type: 3}
@@ -92621,12 +92621,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4848493547508567353, guid: d6f276e29d922e844b20fea1e55aace3,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.1579
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848493547508567353, guid: d6f276e29d922e844b20fea1e55aace3,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.1579
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848493547508567353, guid: d6f276e29d922e844b20fea1e55aace3,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.1579
+      objectReference: {fileID: 0}
+    - target: {fileID: 4848493547508567353, guid: d6f276e29d922e844b20fea1e55aace3,
+        type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -0.76
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4848493545823208133, guid: d6f276e29d922e844b20fea1e55aace3, type: 3}
     - {fileID: 4848493545823208129, guid: d6f276e29d922e844b20fea1e55aace3, type: 3}
+    - {fileID: 3212506205199950696, guid: d6f276e29d922e844b20fea1e55aace3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d6f276e29d922e844b20fea1e55aace3, type: 3}
 --- !u!1 &1938849026 stripped
 GameObject:
@@ -92664,7 +92680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c99dc43c91fad4d3d8242a80220a742f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 3.5
+  minDistance: 6
   boat: {fileID: 488526128}
   canvas: {fileID: 1938849027}
   isRequired: 0
@@ -93035,6 +93051,11 @@ PrefabInstance:
     - target: {fileID: 4449220549958951625, guid: dbe4efa817df8450c8648f69ee1b0558,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185261133756041518, guid: dbe4efa817df8450c8648f69ee1b0558,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6574482589621246669, guid: dbe4efa817df8450c8648f69ee1b0558,
