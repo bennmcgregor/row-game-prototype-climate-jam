@@ -17,16 +17,17 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadNextScene()
     {
-        if (_nextSceneIdx < _sceneOrder.Length)
-        {
-            StartCoroutine(LoadScene());
-        }
+        StartCoroutine(LoadScene());
     }
 
     // always call this before LoadNextScene()
     public void AddToNextSceneIndex(int summand)
     {
         _nextSceneIdx += summand;
+        if (_nextSceneIdx >= _sceneOrder.Length)
+        {
+            _nextSceneIdx = _nextSceneIdx % _sceneOrder.Length;
+        }
     }
 
     public void ActivateNextScene()
@@ -53,7 +54,7 @@ public class SceneLoader : MonoBehaviour
                     // Activate the Scene
                     asyncOperation.allowSceneActivation = true;
                     _shouldActivateNextScene = false;
-                    _nextSceneIdx += 1;
+                    AddToNextSceneIndex(1);
                 }
             }
 

@@ -1,0 +1,43 @@
+﻿title: Scene12WhatsWrong
+tags:
+---
+Nico: You good?
+-> Mio: Keep rowing.
+    <<add_trust_value TrustMeter -25>>
+    <<jump Scene12DontExplain>>
+-> Mio: I... I'm fine.
+    <<add_trust_value TrustMeter 25>>
+    <<jump Scene12Explain>>
+===
+title: Scene12DontExplain
+tags:
+---
+Nico: Was it that photo or something?
+Mio: None of your business.
+<<activate_input GameplayControllers>>
+===
+title: Scene12Explain
+tags:
+---
+Nico: You sure about that?
+<<wait 3>>
+Mio: That’s my grandma there, in that photo.
+-> \[Point to the photo\]
+Nico studies it.
+Mio: She's not here anymore. Because the water shortage...
+Mio: I wonder if she knew this flood was coming.
+<<wait 2>>
+Nico: I've seen that photo somewhere.
+Mio: Huh?
+Nico: They put it up on the mantel in my house. Said she was some sort of distant relative or friend or something of my grandpa.
+Mio: The photo?
+Nico: Yea. I'm sure of it.
+Mio: That's my grandma?
+Nico: Strange.
+<<wait 1>>
+Mio: I was always told that none of the Mire people knew any of the Westlakers.
+Nico: Yea I mean they told me about how the mirites came from some other place...
+Mio: Hm.
+Nico: Yea.
+<<activate_input GameplayControllers>>
+===

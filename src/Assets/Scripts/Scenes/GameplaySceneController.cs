@@ -29,6 +29,7 @@ public class GameplaySceneController : MonoBehaviour
         }
     }
 
+    [YarnCommand("load_branching_scene")]
     public void LoadBranchingScene(int numberOfScenesToSkip)
     {
         _sceneLoader.AddToNextSceneIndex(numberOfScenesToSkip);

@@ -1,0 +1,42 @@
+﻿title: Scene9Insult
+tags:
+---
+Nico: That's a shitty bucket.
+<<wait 1>>
+Nico: I mean it’s the fact that you don’t understand the VALUE of this jewellery that annoys me. It’s just the sheer level of ignorance.
+<<wait 2>>
+Nico: And you made me fish THAT bucket out? There’s a literal HOLE. Man, some people just don’t know what’s worth keeping.
+-> Mio: Oh, I don’t know what’s worth keeping?
+    <<add_trust_value TrustMeter -15>>
+    <<jump Scene9InsultFight>>
+-> Mio: If you actually look at the design on this you’ll see why I wanted it.
+    <<add_trust_value TrustMeter 15>>
+    <<jump Scene9InsultExplain>>
+===
+title: Scene9InsultFight
+tags:
+---
+Mio: YOU are the epitome of what’s wrong with the world. And I mean this sincerely. “Oh we’re in the middle of a natural disaster lemme just grab some bracelets because that has helped NO ONE EVER.”
+Nico: I could trade these.
+Mio: That shit looks tacky. Where I’m from you wouldn’t last A DAY with that on.
+<<activate_input GameplayControllers>>
+===
+title: Scene9InsultExplain
+tags:
+---
+-> \[Toss the bucket to Nico to inspect\]
+    Mio: It's hand-sewn. My mom used to make them when she was younger.
+    Nico: Interesting.
+    Mio: Can't actually put a price on these. You pass them down generationally.
+    Nico: I see.
+<<activate_input GameplayControllers>>
+===
+title: Scene9Grandma
+tags:
+---
+Mio: Oh! I need to pick this up.
+-> \[Carefully take it out of the water\]
+<<pickup_item GrandmaPhotograph>>
+<<activate_input GameplayControllers>>
+<<go_to_next_scene GameplayControllers>>
+===

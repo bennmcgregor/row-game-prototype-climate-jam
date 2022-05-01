@@ -1,0 +1,57 @@
+﻿title: Scene4Entry
+tags:
+---
+<<choose_scene4_image Images 0>>
+Nico: Where am I?
+<<wait 2>>
+\[Nico sees you and instantly recognises you.\]
+<<choose_scene4_image Images 1>>
+Nico: YOU! What did you do?
+<<wait 1>>
+Nico: YOU BROKE IT! You filthy people. THIEVES and HOODLUMS. I bet you knew this was gonna happen... you in your little rowboat. This was YOUR plot, wasn’t it?
+-> Mio: SHUT UP! I just saved your life dumbass so if I were you—
+    <<add_trust_value TrustMeter -5>>
+    <<jump Scene4Fight>>
+-> \[Ignore Nico's insults\]
+    <<jump Scene4Patient>>
+===
+title: Scene4Fight
+tags:
+---
+<<choose_scene4_image Images 2>>
+Nico: YOU BROKE IT!
+Mio: Oh I broke it? You think we were the people who caused this? How about BUILDING A DAM in the first place. Maybe not the brightest idea huh?
+Nico: You thieves came in and stole from us. If you had never—
+Mio: If YOU had never built a dam in the first place and stolen OUR water and wasted it on swimming pools and shit then we wouldn’t have this problem. END OF STORY. You greedy pigs killed my people.
+Nico: NOT TRUE!
+Mio: SHUT UP!
+<<choose_scene4_image Images 4>>
+<<wait 1>>
+Mio: Row!
+Nico: Don't tell me what to do.
+Mio: You wanna go back in the water?
+<<wait 3>>
+<<choose_scene4_image Images 5>>
+Nico: Fine.
+<<go_to_next_scene GameplayControllers>>
+===
+title: Scene4Patient
+tags:
+---
+Nico: I knew that this was your plot. Don’t lie to me. You happy now? You get what you wanted?
+-> \[Reach for a paddle\]
+    <<choose_scene4_image Images 3>>
+Nico: Water EVERYWHERE for EVERYONE. Isn’t this what you mire rats dream of? HUH?
+<<wait 2>>
+<<choose_scene4_image Images 4>>
+Mio: Row.
+Nico: What?
+Mio: Take the paddle, place it in the water and ROW. Do I need to speak another language?
+<<wait 2>>
+\[Nico stares blankly.\]
+Mio: I gotta find my family. If you just wanna sit here, I can let you off the boat no problem.
+<<wait 3>>
+<<choose_scene4_image Images 5>>
+Nico: Fine.
+<<go_to_next_scene GameplayControllers>>
+===

@@ -7,6 +7,8 @@ public class TrustMeter : MonoBehaviour
 {
     private int _trustValue = 50;
 
+    public int TrustValue => _trustValue;
+
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);

@@ -1,0 +1,10 @@
+﻿title: Scene21
+tags:
+---
+PERSPECTIVE SWITCH: As Nico, do you trust Mio?
+-> Yes
+    <<add_trust_value TrustMeter 30>>
+-> No
+    <<add_trust_value TrustMeter -30>>
+<<choose_scene_22 GameplayControllers>>
+===

@@ -1,0 +1,47 @@
+﻿title: Scene14Drowning
+tags:
+---
+Mari: Help! HELP!
+Mio: Mama! Mama!
+Arlo: HELP!
+Nico: Hang on!
+Mio: She's going to drown!
+Nico: He's going to drown!
+Mio: Let's just get to my mom first and then your little friend.
+Nico: LITTLE friend? We've been going to the same country club since we were babies!
+Mari: Aaahhh!! HEL--
+Mari and Arlo begin to submerge.
+Nico: Arlo, did you remove your chains? Maybe that's what's weighing you down!
+Arlo: *gurgles*
+-> \[Reach out to Mari with your paddle\]
+    Nico: Gimme that!
+    Mio: No, I can't have my mom die. She's all I have left.
+    Nico: Arlo is not going down like this! Westlakers like him are undefeatable.
+<<destroy StopMotionAtDrowning>>
+<<activate_input GameplayControllers>>
+===
+title: Scene14ArloDrowning
+tags:
+---
+<<add_trust_value TrustMeter -10>>
+<<destroy MariDrowning>>
+<<destroy ArloDrowning>>
+\[You reach out and pull Mari on board, but it's too late to save Arlo and he slips beneath the water for the last time.\]
+Mio: Mama! You're safe! You're safe. Let's bring you to safety.
+Nico: Goodbye, Arlo.
+\[You bring Mari to shore, then keep going on your journey.\]
+
+<<activate_input GameplayControllers>>
+===
+title: Scene14MariDrowning
+tags:
+---
+<<add_trust_value TrustMeter -10>>
+<<destroy MariDrowning>>
+<<destroy ArloDrowning>>
+\[Right as Nico pulls Arlo on board, Mari slips beneath the water. To your horror, she doesn't surface again.\]
+Nico: Arlo, that's it! You're safe. Let's bring you to shore now.
+Mio: I'm sorry—I'm sorry, mama. You can rest with Sobo now.
+\[You sit as Nico rows Arlo to safety. Now it's time to continue your journey.\]
+<<activate_input GameplayControllers>>
+===

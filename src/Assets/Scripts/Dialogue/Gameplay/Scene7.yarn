@@ -11,9 +11,9 @@ Nico: My bracelet!
 title: Scene7BucketOpening
 tags:
 ---
--> Mio: Wait, get this!
+Mio: Wait, get this!
 Nico: Huh?
--> Mio: This bucket here. I think it's the one my mom made.
+Mio: This bucket here. I think it's the one my mom made.
 Nico: Okay, then get that jewellery. It's closer to your side.
 -> Mio: Jewellery? What's that gonna do for us right now?
     <<add_trust_value TrustMeter -10>>
@@ -26,9 +26,9 @@ title: Scene7BucketArgue
 tags:
 ---
 Nico: You want your bucket?
--> Mio: We don’t have the time or the space to be stopping for every little shiny thing that catches your eye.
+Mio: We don’t have the time or the space to be stopping for every little shiny thing that catches your eye.
 Nico: You wouldn't understand!
--> Mio: No. I understand and I think it's stupid.
+Mio: No. I understand and I think it's stupid.
 Nico: Gimme the net!
 -> \[Grab the net before Nico takes it!\]
     -> \[Take your bucket out of the water with the net\]
@@ -40,12 +40,12 @@ Nico: Gimme the net!
 title: Scene7BucketAgree
 tags:
 ---
--> \[Pick up Nico's jewellery for him\]
-    <<pickup_item ExtraJewelry>>
+\[You pick up Nico's jewellery for him\]
+<<pickup_item ExtraJewelry>>
 Nico: Thank you.
--> Mio: Get that bucket, will you?
-    -> \[Give Nico the net\]
-    Nico: Ok.
-    <<pickup_item Bucket>>
-    <<activate_input GameplayControllers>>
+Mio: Get that bucket, will you?
+-> \[Give Nico the net\]
+Nico: Ok.
+<<pickup_item Bucket>>
+<<activate_input GameplayControllers>>
 ===

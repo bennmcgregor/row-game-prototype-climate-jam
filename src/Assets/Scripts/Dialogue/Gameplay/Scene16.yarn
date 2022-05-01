@@ -1,0 +1,38 @@
+﻿title: Scene16Intro
+tags:
+---
+It's been a long time since you and Nico said anything to each other.
+A fish swims by.
+-> \[Point it out and tell a joke\]
+    <<load_branching_scene GameplayControllers 1>>
+    <<add_trust_value TrustMeter -5>>
+    <<jump Scene16Joke>>
+-> \[Point it out\]
+    <<load_branching_scene GameplayControllers 0>>
+    <<add_trust_value TrustMeter -15>>
+    <<jump Scene16Dump>>
+===
+title: Scene16Joke
+tags:
+---
+Mio: Oh look, another Westlaker!
+Nico: Where?!
+Mio: There, in the water! Another sel-FISH Westlaker!
+<<wait 3>>
+\[Nico dumps your stuff overboard.\]
+Nico: Whoops, more things for those Westlakers in the water! Just how it should be.
+<<activate_input GameplayControllers>>
+<<go_to_next_scene GameplayControllers>>
+===
+title: Scene16Dump
+tags:
+---
+Mio: Oh look, another Westlaker!
+Nico: Where?!
+Mio: There, in the water! Another selfish Westlaker!
+<<wait 3>>
+-> \[Dump Nico's stuff in the water\]
+Nico: Whoops, more things for Westlakers! Just how it should be, right?
+<<activate_input GameplayControllers>>
+<<go_to_next_scene GameplayControllers>>
+===

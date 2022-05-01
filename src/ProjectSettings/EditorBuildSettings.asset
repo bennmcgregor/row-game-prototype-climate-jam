@@ -6,20 +6,44 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Cutscenes/CreditsScene.unity
-    guid: 7c4e287bcad37e84099c95da5637f4d9
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: a37f36f4c58324c4e91f969557a13cd6
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene1.unity
     guid: a8e8479df95044f4aa178e5d6f398633
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene2.unity
+    guid: c088ccc8e3939294a82d78b9af889d01
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene2.5.unity
+    guid: 67fdfb0cb8109b54eaf582aae7167932
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene3.unity
     guid: e08a9f8d5e87d451889e9163308731b6
   - enabled: 1
     path: Assets/Scenes/Gameplay/Scene4Dialogue.unity
-    guid: f7280c7a63feb4448a1d09a67570092b
+    guid: 4eb55b57e6e954507acd030f3324a2d8
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene4.unity
+    guid: b6f580f1f3194ca4d85c7fe33ffce3b2
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene6.unity
+    guid: 506ed9f2c42d8784d87ca0fe153a6c20
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene11.unity
     guid: c6d28444ac53f4f5dbf92a6af73cda26
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene6.5.unity
+    guid: 283ecc3e188679047972ea7c66288ae4
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene7.unity
+    guid: 3d23c5582c123f642b35984dda34ea18
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene8.unity
+    guid: 3ebe2d67879fbf849975eb4683182a35
+  - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene9.unity
+    guid: 070a02a1dba402841920db8be4b693b1
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene18.unity
     guid: e8add84a9117f44939daf355f3fda1c7
@@ -30,33 +54,21 @@ EditorBuildSettings:
     path: Assets/Scenes/Cutscenes/Scene20.unity
     guid: 045ccc492206e4d47901e40a6a57e216
   - enabled: 1
+    path: Assets/Scenes/Gameplay/Scene21.unity
+    guid: 11f18d37e5c5843cdb2c9a956f80efc9
+  - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene22a.unity
     guid: c800582540d384cad86780fb496f8968
   - enabled: 1
     path: Assets/Scenes/Cutscenes/Scene22c.unity
     guid: e224c8afe02384d8da65c6bc11ab31a8
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene2.5.unity
-    guid: 67fdfb0cb8109b54eaf582aae7167932
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene2.unity
-    guid: c088ccc8e3939294a82d78b9af889d01
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene4.unity
-    guid: b6f580f1f3194ca4d85c7fe33ffce3b2
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene6.5.unity
-    guid: 283ecc3e188679047972ea7c66288ae4
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene6.unity
-    guid: 506ed9f2c42d8784d87ca0fe153a6c20
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene7.unity
-    guid: 3d23c5582c123f642b35984dda34ea18
-  - enabled: 1
-    path: Assets/Scenes/Gameplay/Scene8.unity
-    guid: 3ebe2d67879fbf849975eb4683182a35
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Cutscenes/CreditsScene.unity
+    guid: 7c4e287bcad37e84099c95da5637f4d9
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
     path: Assets/Scenes/MenuScene.unity
     guid: 0b7c93b0d085057698bc0abcc6b6e220
   m_configObjects:
