@@ -37,3 +37,5 @@ sysinfo.txt
 *.unitypackage
 src/Logs/AssetImportWorker0.log
 src/Logs/AssetImportWorker1.log
+src/Assets/StreamingAssets/build_info
+src/UserSettings/EditorUserSettings.asset
