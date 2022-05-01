@@ -11,9 +11,4 @@ ScriptedImporter:
   LastImportHadImplicitStringIDs: 1
   LastImportHadAnyStrings: 1
   isSuccessfullyParsed: 1
-  parseErrorMessages:
-  - '30:0: Error: The node '':22cCredits'' contains illegal characters in its title.
-
-    title::22cCredits
-
-'
+  parseErrorMessages: []

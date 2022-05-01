@@ -3,7 +3,8 @@ tags:
 ---
 <<deactivate_input GameplayControllers>>
 Welcome to your rowboat!
-To take strokes, hold down and release the spacebar. You can reverse direction by holding down left shift, but moving backwards is slower.
+To take strokes, hold down and release the spacebar.
+To row backwards, hold down left shift. Rowing in reverse is slower. You can also row backwards if you get stuck!
 The mark of a good rower is long, consistently-timed strokes. This is essential for moving the boat quickly. Consistent timing is especially crucial when you're rowing with someone else!
 Also, make sure not to keep your oars in the water for too long after the stroke, the drag will slow you down.
 <<activate_input GameplayControllers>>
