@@ -3,6 +3,7 @@ tags:
 ---
 Nico: These are insults that must be added.
 <<activate_input GameplayControllers>>
+<<go_to_next_scene GameplayControllers>>
 ===
 title: Scene2Reminder
 tags:
