@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
     [SerializeField] private SceneLoader _sceneLoader;
-    [SerializeField] private string _creditsSceneName;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private GameObject _credits;
+    [SerializeField] private GameObject _menu;
 
     private void Awake()
     {
@@ -20,6 +21,13 @@ public class MainMenu : MonoBehaviour
 
     public void OpenCredits()
     {
-        SceneManager.LoadScene(_creditsSceneName);
+        _credits.SetActive(true);
+        _menu.SetActive(false);
+    }
+
+    public void CloseCredits()
+    {
+        _menu.SetActive(true);
+        _credits.SetActive(false);
     }
 }
