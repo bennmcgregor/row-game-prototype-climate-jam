@@ -7,6 +7,7 @@ public class CutsceneController : MonoBehaviour
     [SerializeField] private SlideShowBase _slideShow;
     [SerializeField] private AudioSource _audioSource;
     [SerializeField] private int _numberOfScenesToSkip = 0;
+    [SerializeField] private bool _loadMainMenuNext = false;
     private SceneLoader _sceneLoader;
 
     private void Awake()
@@ -25,7 +26,11 @@ public class CutsceneController : MonoBehaviour
         _sceneLoader.OnSceneExitStarted += StartFadeOut;
         
         // start asynchronously loading the next scene
-        if (_sceneLoader != null)
+        if (_loadMainMenuNext)
+        {
+            _sceneLoader.LoadNextScene();
+        }
+        else if (_sceneLoader != null)
         {
             if (_numberOfScenesToSkip > 0)
             {
@@ -48,4 +53,5 @@ public class CutsceneController : MonoBehaviour
     {
         StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
     }
+    
 }

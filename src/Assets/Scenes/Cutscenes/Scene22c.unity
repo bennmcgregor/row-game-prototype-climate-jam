@@ -652,6 +652,7 @@ MonoBehaviour:
   _slideShow: {fileID: 439453200}
   _audioSource: {fileID: 2117017560}
   _numberOfScenesToSkip: 0
+  _loadMainMenuNext: 1
 --- !u!4 &1242237218
 Transform:
   m_ObjectHideFlags: 0

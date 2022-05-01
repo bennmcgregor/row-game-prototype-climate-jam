@@ -8,6 +8,7 @@ public class SceneTransitionTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
+        Debug.Log("NextScene");
         _sceneController.GoToNextScene();
     }
 }

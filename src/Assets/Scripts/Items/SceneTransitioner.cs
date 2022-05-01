@@ -15,6 +15,7 @@ public class SceneTransitioner : Interactable
     {
         if (_hasNotRunYet)
         {
+            _hasNotRunYet = false;
             bool canProgress = true;
             foreach (Interactable interactable in _interactables)
             {
@@ -32,7 +33,6 @@ public class SceneTransitioner : Interactable
             {
                 _dialogueTrigger.TriggerDialogue();
             }
-            _hasNotRunYet = false;
         }
     }
 }
