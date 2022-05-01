@@ -9,24 +9,30 @@ public class SceneTransitioner : Interactable
 
     [SerializeField] private DialogueTrigger _dialogueTrigger;
 
+    private bool _hasNotRunYet = true;
+
     protected override void Action()
     {
-        bool canProgress = true;
-        foreach (Interactable interactable in _interactables)
+        if (_hasNotRunYet)
         {
-            if (!interactable.GetIsComplete())
+            bool canProgress = true;
+            foreach (Interactable interactable in _interactables)
             {
-                canProgress = false;
-                break;
-            }   
-        }
-        if (canProgress)
-        {
-            _sceneController.GoToNextScene();
-        }
-        else 
-        {
-            _dialogueTrigger.TriggerDialogue();
+                if (!interactable.GetIsComplete())
+                {
+                    canProgress = false;
+                    break;
+                }   
+            }
+            if (canProgress)
+            {
+                _sceneController.GoToNextScene();
+            }
+            else 
+            {
+                _dialogueTrigger.TriggerDialogue();
+            }
+            _hasNotRunYet = false;
         }
     }
 }

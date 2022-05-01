@@ -42,6 +42,7 @@ public class SceneLoader : MonoBehaviour
     private IEnumerator LoadScene()
     {
         yield return null;
+        UnityEngine.Debug.Log($"_nextSceneIndex: {_nextSceneIdx}");
 
         // Begin to load the Scene you specify
         AsyncOperation asyncOperation = SceneManager.LoadSceneAsync(_sceneOrder[_nextSceneIdx]);
