@@ -12,7 +12,7 @@ public class CutsceneController : MonoBehaviour
     private void Awake()
     {
         _slideShow.OnSlideshowFinished += () => _sceneLoader.ActivateNextScene();
-        _sceneLoader = FindObjectOfType<SceneLoader>();
+        
     }
 
     private void Start()
@@ -21,6 +21,8 @@ public class CutsceneController : MonoBehaviour
         _audioSource.Play();
         // start slideshow
         _slideShow.StartSlideshow();
+
+        _sceneLoader = FindObjectOfType<SceneLoader>();
         
         // start asynchronously loading the next scene
         if (_sceneLoader != null)
@@ -30,6 +32,10 @@ public class CutsceneController : MonoBehaviour
                 _sceneLoader.AddToNextSceneIndex(_numberOfScenesToSkip);
             }
             _sceneLoader.LoadNextScene();
+        }
+        else 
+        {
+            Debug.Log("SceneLoader not found");
         }
     }
 }

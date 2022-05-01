@@ -7,13 +7,14 @@ public class FaucetAction : Interactable
     private int faucetTriggerTime = 600;
     private Animator m_animator;
     private bool hasEventOccured = false;
+    public GameObject warningCollider;
 
     protected override void Action ()
     {
         m_animator.SetBool ("IsFaucetOn", !m_animator.GetBool("IsFaucetOn"));
     }
 
-     public void Start ()
+     protected override void ChildStart ()
      {
          m_animator = GetComponent<Animator>();
      }
@@ -25,6 +26,10 @@ public class FaucetAction : Interactable
             Animator m_animator = GetComponent<Animator>();
         if (m_animator.GetBool ("IsFaucetOn"))
         {
+            if (warningCollider)
+            {
+                GameObject.Destroy(warningCollider);
+            }
             if (faucetTriggerTime > 0)
             {
                 faucetTriggerTime--;
@@ -32,7 +37,6 @@ public class FaucetAction : Interactable
             else
             {
                 GetComponent<DialogueTrigger>().TriggerDialogue();
-                //m_animator.SetBool ("IsFaucetOn", false);
                 hasEventOccured = true;
             }
         }

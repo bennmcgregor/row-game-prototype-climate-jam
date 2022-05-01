@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DefaultRowboatParams2D
   m_EditorClassIdentifier: 
   MaxPullForce: 15
-  MaxPushForce: 5
+  MaxPushForce: 10
   OarDragScalingFactor: 0.05
   StoppingForce: 5
   InPerfectTimeThreshhold: 0.02

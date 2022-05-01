@@ -1,0 +1,6 @@
+﻿title: SceneNotComplete
+tags:
+---
+You haven't completed all of the required actions in the scene. Please go back and explore further!
+<<activate_input GameplayControllers>>
+===

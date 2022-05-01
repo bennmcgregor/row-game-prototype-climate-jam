@@ -6,8 +6,8 @@ Nico: You rugrats! All of you! Go back to your shitty dilapitated villages!
 Nico: Go live in the filth where you belong! Gutter rat! You’ve never worked for anything have you?
 Nico: You’ve never worked a day in your life! All you do is steal! Steal from what other people work hard to make nice! And you break shit too! 
 Nico: GO BACK and DON'T COME BACK. You hear?
--> Ignore him
-Mio: Weird... it seems like it's starting to rain...
+-> \[Ignore him\]
+Mio: Huh, very weird... it seems like it's starting to rain...
 <<activate_input GameplayControllers>>
 <<go_to_next_scene GameplayControllers>>
 ===
