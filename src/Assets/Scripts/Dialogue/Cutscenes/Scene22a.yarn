@@ -1,0 +1,27 @@
+﻿title: 22aA
+tags:
+---
+Mio: You should go step on it now. I just need to test if it’ll support someone.
+<<wait 2>>
+Mio: It's my boat you're in.
+===
+title: 22aB
+tags:
+---
+Nico: Fine.
+===
+title: 22aD
+tags:
+---
+Mio: No! Step on the part in the center!
+===
+title: 22aEi
+tags:
+---
+Nico: Help!
+===
+title: 22aEii
+tags:
+---
+<<kill_dialogue Controllers>>
+===

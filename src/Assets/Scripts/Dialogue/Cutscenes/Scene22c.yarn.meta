@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 80b30644586bd47c988a5c4e2301af68
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  LastImportHadImplicitStringIDs: 1
+  LastImportHadAnyStrings: 1
+  isSuccessfullyParsed: 1
+  parseErrorMessages:
+  - '30:0: Error: The node '':22cCredits'' contains illegal characters in its title.
+
+    title::22cCredits
+
+'

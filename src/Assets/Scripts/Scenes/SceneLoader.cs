@@ -23,6 +23,7 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    // always call this before LoadNextScene()
     public void AddToNextSceneIndex(int summand)
     {
         _nextSceneIdx += summand;

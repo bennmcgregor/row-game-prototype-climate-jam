@@ -26,4 +26,11 @@ public class SlideShowDialogueRunner : MonoBehaviour
         _currentIndex++;
         NextSlideCalled?.Invoke();
     }
+
+    [YarnCommand("kill_dialogue")]
+    public void KillDialogue()
+    {
+        _dialogueRunner.gameObject.SetActive(false);
+        _slideShow.OnNextSlide -= OnNextSlide;
+    }
 }

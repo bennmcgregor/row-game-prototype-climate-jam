@@ -12,6 +12,9 @@ ScriptedImporter:
   - {fileID: 6391573757903218779, guid: ccb8c1b5eeb0b4ab0a621318480d2f0c, type: 3}
   - {fileID: 6391573757903218779, guid: b1cda874c22db43458d3e5836b9e0250, type: 3}
   - {fileID: 6391573757903218779, guid: 71dc5ae39fb4a4cbe9a848c39ecdc0c2, type: 3}
+  - {fileID: 6391573757903218779, guid: 8fd513d72f3b24b98806b41a27862b14, type: 3}
+  - {fileID: 6391573757903218779, guid: a1ae714706c48420d8c7d480291f5702, type: 3}
+  - {fileID: 6391573757903218779, guid: 80b30644586bd47c988a5c4e2301af68, type: 3}
   compileErrors: []
   serializedDeclarations: []
   defaultLanguage: en-CA

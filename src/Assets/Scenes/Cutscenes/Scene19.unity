@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _times:
-  - 18
+  - 15
 --- !u!1 &1242237216
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _slideShow: {fileID: 439453200}
   _audioSource: {fileID: 2117017560}
+  _numberOfScenesToSkip: 0
 --- !u!4 &1242237218
 Transform:
   m_ObjectHideFlags: 0
