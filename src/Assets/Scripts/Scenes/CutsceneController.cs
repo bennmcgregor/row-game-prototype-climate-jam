@@ -28,7 +28,7 @@ public class CutsceneController : MonoBehaviour
         // start asynchronously loading the next scene
         if (_loadMainMenuNext)
         {
-            _sceneLoader.LoadNextScene();
+            _sceneLoader.LoadMenuScene();
         }
         else if (_sceneLoader != null)
         {
@@ -46,12 +46,12 @@ public class CutsceneController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _sceneLoader.OnSceneExitStarted -= StartFadeOut;
+       // _sceneLoader.OnSceneExitStarted -= StartFadeOut;
     }
 
     private void StartFadeOut()
     {
-        StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
+        //StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
     }
     
 }

@@ -31,13 +31,13 @@ public class GameplaySceneController : MonoBehaviour
 
     private void OnDestroy()
     {
-        _sceneLoader = FindObjectOfType<SceneLoader>();
-        _sceneLoader.OnSceneExitStarted -= StartFadeOut;
+        //_sceneLoader = FindObjectOfType<SceneLoader>();
+        //_sceneLoader.OnSceneExitStarted -= StartFadeOut;
     }
 
     private void StartFadeOut()
     {
-        StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
+        //StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
     }
 
     [YarnCommand("load_branching_scene")]
