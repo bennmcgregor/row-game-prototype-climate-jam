@@ -23,7 +23,7 @@ public class CutsceneController : MonoBehaviour
         _slideShow.StartSlideshow();
 
         _sceneLoader = FindObjectOfType<SceneLoader>();
-        _sceneLoader.OnSceneExitStarted += StartFadeOut;
+        // _sceneLoader.OnSceneExitStarted += StartFadeOut;
         
         // start asynchronously loading the next scene
         if (_loadMainMenuNext)
@@ -44,14 +44,14 @@ public class CutsceneController : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        _sceneLoader.OnSceneExitStarted -= StartFadeOut;
-    }
+    // private void OnDestroy()
+    // {
+    //     _sceneLoader.OnSceneExitStarted -= StartFadeOut;
+    // }
 
-    private void StartFadeOut()
-    {
-        StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
-    }
+    // private void StartFadeOut()
+    // {
+    //     StartCoroutine(AudioHelper.FadeOut(_audioSource, 2));
+    // }
     
 }
