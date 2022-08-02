@@ -10,15 +10,22 @@ public class RowBoat2D : MonoBehaviour
     // move the camera to follow the boat at all times
     // control the entry/exit of the rower in the boat
 
+    public Action<float, float> OnPlayerCatch;
+    public Action<float, float> OnPlayerFinish;
+    public Action OnNPCCatch;
+    public Action OnNPCFinish;
+
     //visible Properties
-    [SerializeField] private RowboatParams2D _rowboatParams2D;
+    [SerializeField] private RowboatParamsProvider _rowboatParamsProvider;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private NPCController _npcController;
     [SerializeField] private Rigidbody2D _rigidbody2D;
     [SerializeField] private LayerMask _verticalMovementMask;
 
     private bool _hasPlayerCatched = false;
-    private bool _hasDriveEnded = false;
+    private bool _hasPlayerDriveEnded = false;
+    private bool _hasNPCCatched = false;
+    private bool _hasNPCFinished = false;
     private RudderStateMachine _rudderStateMachine;
     private float _rudderTimer = 0f;
     private bool _hasMovedVerticallyOnThisStroke = false;
@@ -35,7 +42,7 @@ public class RowBoat2D : MonoBehaviour
 
     private void Awake()
     {
-        _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
+        _timingMultiplier = _rowboatParamsProvider.GetTrustSystemParams().NoBowEffectTimingMultiplier; 
         _rudderStateMachine = new RudderStateMachine(RudderState.NONE);
         _directionStateMachine = new DirectionStateMachine(DirectionState.FORWARD);
     }
@@ -112,23 +119,24 @@ public class RowBoat2D : MonoBehaviour
         if (_playerController.CurrentState == RowingState.DRIVE)
         {
             _rudderTimer += Time.deltaTime;
-            if (!_hasPlayerCatched && _hasDriveEnded)
+            if (!_hasPlayerCatched && _hasPlayerDriveEnded)
             {
                 _hasPlayerCatched = true;
-                _hasDriveEnded = false;
+                OnPlayerCatch?.Invoke(_playerController.Slider.Value, _npcController.Slider.Value);
+                _hasPlayerDriveEnded = false;
             }
 
-            boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPullForce;
+            boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParamsProvider.RowboatParams.MaxPullForce;
             if (DirectionState == DirectionState.REVERSE)
             {
-                boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParams2D.MaxPushForce;
+                boatForceMultiplierStroke = _playerController.CurrentForce * _rowboatParamsProvider.RowboatParams.MaxPushForce;
             }
 
             // UnityEngine.Debug.Log($"acceleration: {_playerController.CurrentForce}, mult: {boatForceMultiplierStroke}");
             // move the boat vertically, if necessary
-            if ((_rudderTimer > _rowboatParams2D.RudderTimerThreshhold ||
-                Math.Abs(_playerController.CurrentForce) > _rowboatParams2D.RudderAccelerationThreshhold) && 
-                Math.Abs(_rigidbody2D.velocity.x) > _rowboatParams2D.RudderMotionThreshhold &&
+            if ((_rudderTimer > _rowboatParamsProvider.RowboatParams.RudderTimerThreshhold ||
+                Math.Abs(_playerController.CurrentForce) > _rowboatParamsProvider.RowboatParams.RudderAccelerationThreshhold) && 
+                Math.Abs(_rigidbody2D.velocity.x) > _rowboatParamsProvider.RowboatParams.RudderMotionThreshhold &&
                 !_hasMovedVerticallyOnThisStroke)
             {
                 switch (_rudderStateMachine.State)
@@ -148,9 +156,9 @@ public class RowBoat2D : MonoBehaviour
 
             // apply some extra force in the opposite direction to stop the boat
             if ((DirectionState == DirectionState.FORWARD && 
-                 _rigidbody2D.velocity.x < 0 - _rowboatParams2D.StoppingSpeedThreshhold ||
+                 _rigidbody2D.velocity.x < 0 - _rowboatParamsProvider.RowboatParams.StoppingSpeedThreshhold ||
                  DirectionState == DirectionState.REVERSE &&
-                 _rigidbody2D.velocity.x > 0 + _rowboatParams2D.StoppingSpeedThreshhold) &&
+                 _rigidbody2D.velocity.x > 0 + _rowboatParamsProvider.RowboatParams.StoppingSpeedThreshhold) &&
                 !_hasStoppedBoatOnThisStroke)
             {
                 _rigidbody2D.AddForce(-_rigidbody2D.velocity * _rigidbody2D.mass, ForceMode2D.Impulse);
@@ -159,10 +167,11 @@ public class RowBoat2D : MonoBehaviour
         }
         else if (_playerController.CurrentState == RowingState.RECOVERY)
         {
-            if (!_hasDriveEnded)
+            if (!_hasPlayerDriveEnded)
             {
-                _hasDriveEnded = true;
-                _timingMultiplier = _rowboatParams2D.NoBowEffectTimingMultiplier; 
+                _hasPlayerDriveEnded = true;
+                OnPlayerFinish?.Invoke(_playerController.Slider.Value, _npcController.Slider.Value);
+                _timingMultiplier = _rowboatParamsProvider.GetTrustSystemParams().NoBowEffectTimingMultiplier; 
                 _rudderTimer = 0;
             }
             if (_hasMovedVerticallyOnThisStroke)
@@ -180,13 +189,13 @@ public class RowBoat2D : MonoBehaviour
             if (_hasPlayerCatched)
             {
                 float distanceDelta = Math.Abs(_npcController.Slider.Value - _playerController.Slider.Value) / 100f;
-                if (distanceDelta < _rowboatParams2D.InPerfectTimeThreshhold)
+                if (distanceDelta < _rowboatParamsProvider.GetTrustSystemParams().InPerfectTimeThreshhold)
                 {
-                    _timingMultiplier = _rowboatParams2D.PerfectTimingMultiplier;
+                    _timingMultiplier = _rowboatParamsProvider.GetTrustSystemParams().PerfectTimingMultiplier;
                 }
-                else if (distanceDelta < _rowboatParams2D.InTimeThreshhold)
+                else if (distanceDelta < _rowboatParamsProvider.GetTrustSystemParams().InTimeThreshhold)
                 {
-                    _timingMultiplier = _rowboatParams2D.InTimeTimingMultiplier;
+                    _timingMultiplier = _rowboatParamsProvider.GetTrustSystemParams().InTimeTimingMultiplier;
                 }
                 else
                 {
@@ -195,6 +204,22 @@ public class RowBoat2D : MonoBehaviour
                 // UnityEngine.Debug.Log($"dd: {distanceDelta}, _timingMultiplier: {_timingMultiplier}");
 
                 _hasPlayerCatched = false;
+            }
+
+            if (!_hasNPCCatched)
+            {
+                _hasNPCCatched = true;
+                _hasNPCFinished = false;
+                OnNPCCatch?.Invoke();
+            }
+        }
+        else if (_npcController.CurrentState == RowingState.RECOVERY)
+        {
+            if (!_hasNPCFinished)
+            {
+                _hasNPCFinished = true;
+                _hasNPCCatched = false;
+                OnNPCFinish?.Invoke();
             }
         }
 
@@ -217,7 +242,7 @@ public class RowBoat2D : MonoBehaviour
                 Math.Abs(boatForceMultiplier) > 0)
             {
                 _rigidbody2D.AddForce(
-                    -_rigidbody2D.velocity*_rigidbody2D.mass*_rowboatParams2D.OarDragScalingFactor,
+                    -_rigidbody2D.velocity*_rigidbody2D.mass*_rowboatParamsProvider.RowboatParams.OarDragScalingFactor,
                     ForceMode2D.Impulse
                 );
             }
@@ -247,14 +272,14 @@ public class RowBoat2D : MonoBehaviour
     private IEnumerator MoveVerticallyCoroutine(Vector3 directionMultiplier, Vector3 targetPosition)
     {
         float timer = 0;
-        while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatParams2D.MaxVerticalMoveTime)
+        while (Math.Abs(transform.position.y - targetPosition.y) > 0f && timer < _rowboatParamsProvider.RowboatParams.MaxVerticalMoveTime)
         {
             timer += Time.deltaTime;
             Vector3 newYPos = new Vector3(transform.position.x, targetPosition.y, transform.position.z);
             transform.position = Vector3.MoveTowards(
                 transform.position,
                 newYPos,
-                _rowboatParams2D.VerticalMoveSpeed * Time.deltaTime
+                _rowboatParamsProvider.RowboatParams.VerticalMoveSpeed * Time.deltaTime
             );
             yield return null;
         }

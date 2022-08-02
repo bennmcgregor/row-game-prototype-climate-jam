@@ -20,3 +20,43 @@ Mio: Together.
 Nico: But will it hold both of us?
 Mio: There's only one way to find out.
 ===
+title: 20A_R
+tags:
+---
+Nico: I hate this.
+Mio: I am aware.
+===
+title: 20B_R
+tags:
+---
+\[Nico gestures to the sky.\]
+Nico: Why... WHY would you put me here with her?
+Mio: Pull yourself together or I'll push you off and fulfil your God wish.
+===
+title: 20C_R
+tags:
+---
+Mio: Hey...
+===
+title: 20D_R
+tags:
+---
+Nico: What?
+===
+title: 20E_R
+tags:
+---
+Mio: It floats!
+Nico: Duh, that's physics, but I guess with your literacy rates you—
+Mio: No. It FLOATS.
+<<wait 2>>
+Nico: Are you...
+===
+title: 20F_R
+tags:
+---
+Mio: You think?
+Nico: An island? But will it hold all of us?
+<<wait 2>>
+Mio: There's only one way to find out.
+===

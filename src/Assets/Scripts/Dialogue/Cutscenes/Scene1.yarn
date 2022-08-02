@@ -37,7 +37,6 @@ Mio: I’m gonna go.
 Sobo: Mio. You must listen. There are more things I must tell you. You are still young. There is much you don’t know.
 Mari: Mio.
 Sobo: I don't have long...
-<<wait 2>>
 Mio: No! I can get to the spring tonight. If she can get some freshwater she’ll make it. Just give me an hour. Keep Sobo awake until then.
 ===
 title: 1F
@@ -45,6 +44,20 @@ tags:
 ---
 Mari: It’s not safe right now Mio!
 Mari: They’ll catch you! You saw what they did to Odette?
-<<wait 2>>
+===
+title: 1G
+tags:
+---
+Mio: STOP. Just—
 Mari: Nico could be out there.
+===
+title: 1H
+tags:
+---
+Mio: Don't say his name. If you say his name again—
+Mari: Mio. There was nothing you could have done.
+===
+title: 1I
+tags:
+---
 ===

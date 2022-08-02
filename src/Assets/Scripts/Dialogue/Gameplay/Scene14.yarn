@@ -17,7 +17,6 @@ Arlo: *gurgles*
     Nico: Gimme that!
     Mio: No, I can't have my mom die. She's all I have left.
     Nico: Arlo is not going down like this! Westlakers like him are undefeatable.
-<<destroy StopMotionAtDrowning>>
 <<activate_input GameplayControllers>>
 ===
 title: Scene14ArloDrowning

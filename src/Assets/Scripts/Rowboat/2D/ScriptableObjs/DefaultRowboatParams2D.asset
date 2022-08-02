@@ -27,3 +27,5 @@ MonoBehaviour:
   StoppingSpeedThreshhold: 0.5
   VerticalMoveSpeed: 5
   MaxVerticalMoveTime: 1
+  DisplayedSpeedMultiplier: 8
+  DisplayedAccelerationMultiplier: 800

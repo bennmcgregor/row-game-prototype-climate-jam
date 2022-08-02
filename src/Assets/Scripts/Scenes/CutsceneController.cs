@@ -12,7 +12,12 @@ public class CutsceneController : MonoBehaviour
 
     private void Awake()
     {
-        _slideShow.OnSlideshowFinished += () => _sceneLoader.ActivateNextScene();
+        _slideShow.OnSlideshowFinished += ActivateNextScene;
+    }
+
+    public void ActivateNextScene()
+    {
+        _sceneLoader.ActivateNextScene();
     }
 
     private void Start()

@@ -1,4 +1,14 @@
-﻿title: Scene7Bracelet
+﻿title: Scene7HUDTutorial
+tags:
+---
+<<deactivate_input GameplayControllers>>
+You'll notice that there's a HUD at the top of the screen with five items. Here's an explanation of how to use a few of them.
+The Timing meter is used to measure how in time you are with Nico. The higher the value, the faster your boat will go! Remember, consistent timing AND stroke length is key.
+The Trust meter measures the level of trust between you and Nico. This value affects how easily you are able to row with him.
+The Stroke Length meter gives a measure of how long each stroke of the oar in the water is. Longer strokes allow for greater boat speed!
+<<activate_input GameplayControllers>>
+===
+title: Scene7Bracelet
 tags:
 ---
 Nico: My bracelet!

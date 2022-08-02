@@ -11,7 +11,7 @@ public class NPCController : MonoBehaviour
     [SerializeField] private float _velocity = 1f;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private float _maximumSpeed = 2.5f;
-    [SerializeField] private float _delayTime = 0.2f;
+    [SerializeField] private RowboatParamsProvider _rowboatParamsProvider;
     [SerializeField] private RowBoat2D _rowboat;
     [SerializeField] private bool _isEmpty = false;
 
@@ -138,7 +138,7 @@ public class NPCController : MonoBehaviour
                     }
                 }
                 // wait for the player to start the catch
-                yield return new WaitForSeconds(_delayTime);
+                yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
             } while (!_hasCatchUpdate && !_hasFinishUpdate);
 
             // _hasCatchUpdate will always be set first
@@ -200,7 +200,7 @@ public class NPCController : MonoBehaviour
                     {
                         _velocity = 0;
                     }
-                    yield return new WaitForSeconds(_delayTime);
+                    yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
                 } while (!_hasFinishUpdate);
                 _hasFinishUpdate = false;
                 // Assert.IsTrue(_playerController.CurrentState == RowingState.RECOVERY);
@@ -211,7 +211,7 @@ public class NPCController : MonoBehaviour
                 _velocity = -1 * requiredDriveSpeedToMatchPlayer;
                 _stateMachine.StateTransition();
                 // Assert.IsTrue(_stateMachine.State == RowingState.DRIVE);
-                yield return new WaitForSeconds(_delayTime);
+                yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
             }
             
             DRIVE:
@@ -240,7 +240,7 @@ public class NPCController : MonoBehaviour
                     }
                 }
                 // wait for the player to start the finish
-                yield return new WaitForSeconds(_delayTime);
+                yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
             } while (!_hasFinishUpdate && !_hasCatchUpdate);
 
             // _hasFinishUpdate will always be set first
@@ -303,7 +303,7 @@ public class NPCController : MonoBehaviour
                     {
                         _velocity = 0;
                     }
-                    yield return new WaitForSeconds(_delayTime);
+                    yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
                 } while (!_hasCatchUpdate);
                 _hasCatchUpdate = false;
                 // Assert.IsTrue(_playerController.CurrentState == RowingState.DRIVE);
@@ -314,7 +314,7 @@ public class NPCController : MonoBehaviour
                 _velocity = requiredRecoverySpeedToMatchPlayer;
                 _stateMachine.StateTransition();
                 // Assert.IsTrue(_stateMachine.State == RowingState.RECOVERY);
-                yield return new WaitForSeconds(_delayTime);
+                yield return new WaitForSeconds(_rowboatParamsProvider.GetTrustSystemParams().NPCDelayTime);
             }
         }
     }

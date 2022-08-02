@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _driveSequence:
-  - {fileID: 21300000, guid: e179d845c9b3c406e8b17cf2fa06c200, type: 3}
+  - {fileID: 21300000, guid: d5e513a9c01654c4ea2d6ed383b3d606, type: 3}
   - {fileID: 21300000, guid: e406e695bb9b14105a0f72f9d6d37bfa, type: 3}
   - {fileID: 21300000, guid: c546daefba4024837898eebbfcf50a4f, type: 3}
   - {fileID: 21300000, guid: 99c63e09bde074a17b8b7b5285318273, type: 3}
@@ -115,12 +115,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 92856bc46ab294a9e8433340fab19f73, type: 3}
   - {fileID: 21300000, guid: 729e14ee9792e4d9c93194f8cdd8ac2e, type: 3}
   _recoverySequence:
-  - {fileID: 21300000, guid: d4d0b79afc62b4b3597889c442adc3fa, type: 3}
-  - {fileID: 21300000, guid: b15862b8b2d0d4f5398956d4b0cc1138, type: 3}
-  - {fileID: 21300000, guid: f8df4f00fd80c41319572f9e5d578635, type: 3}
-  - {fileID: 21300000, guid: 91bb63a5dcd1d4412a19245e590decc1, type: 3}
-  - {fileID: 21300000, guid: 61f278c50dc42414b8ee77d0273842e1, type: 3}
-  - {fileID: 21300000, guid: 986c5f052b6cb46e6b8fb85951fa37cf, type: 3}
+  - {fileID: 21300000, guid: 195c90789b56347c3a029e8dce06a131, type: 3}
+  - {fileID: 21300000, guid: 44e03f2dded204a5ab80a24f19ae9c8f, type: 3}
+  - {fileID: 21300000, guid: 09103119409dc4c819a25adf44e233fd, type: 3}
+  - {fileID: 21300000, guid: 9d9cc2a1721f54171801863b587e85ab, type: 3}
+  - {fileID: 21300000, guid: 1651d04c3e20646cd8f5b49d6b90a0a9, type: 3}
+  - {fileID: 21300000, guid: cc573dc815cd34215973de5b1f8c440f, type: 3}
   - {fileID: 21300000, guid: d88e4017fe84b4f478f187dc63f2e6d7, type: 3}
   - {fileID: 21300000, guid: 2eb3e11e92a1f4682b505b2e08e5b947, type: 3}
   - {fileID: 21300000, guid: d3105e3b9dd8b4b2d99eabdb11ae0a6f, type: 3}
@@ -157,6 +157,8 @@ GameObject:
   - component: {fileID: 3747141280413476374}
   - component: {fileID: 3747141280413476372}
   - component: {fileID: 3747141280413476371}
+  - component: {fileID: 3976947838579778898}
+  - component: {fileID: 1480115449439859752}
   m_Layer: 0
   m_Name: Rowboat-Forward
   m_TagString: Untagged
@@ -240,7 +242,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3dbbcabbbdd640ceb3e2b0e64559ba1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rowboatParams2D: {fileID: 11400000, guid: 8a7a754c406ba4161b93ddc4f69582e1, type: 2}
+  _rowboatParamsProvider: {fileID: 3976947838579778898}
   _playerController: {fileID: 3747141279918311454}
   _npcController: {fileID: 3747141280657038381}
   _rigidbody2D: {fileID: 3747141280413476373}
@@ -278,6 +280,43 @@ MonoBehaviour:
   m_DefaultActionMap: RowingTest
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &3976947838579778898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3747141280413476392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82575c708cd7b4b4d8a38b81c04508d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _thresholds: 18fcffff010000001a000000290000003c0000004b00000064000000
+  _trustSystemRowboatParams:
+  - {fileID: 11400000, guid: 7d076764d80194a86857be354b2e7f8e, type: 2}
+  - {fileID: 11400000, guid: b89b153bd6d8d46c5bef5bd9c01b8169, type: 2}
+  - {fileID: 11400000, guid: 6b1383267d97a4d5aa721e565f2ff812, type: 2}
+  - {fileID: 11400000, guid: 2b248b1a3c0fa4f5eb6c95036c12bd31, type: 2}
+  - {fileID: 11400000, guid: 66344fa214581462780b3a1f24a9c6a6, type: 2}
+  - {fileID: 11400000, guid: e5331b9365513483e96ae8bcc884e200, type: 2}
+  - {fileID: 11400000, guid: d943511d3ad994d9c97655ae4f196733, type: 2}
+  _rowboatParams: {fileID: 11400000, guid: 8a7a754c406ba4161b93ddc4f69582e1, type: 2}
+--- !u!114 &1480115449439859752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3747141280413476392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b998ed7dc9ff43a7a045738cbde3375, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rigidbody2D: {fileID: 3747141280413476373}
+  _rowboatParamsProvider: {fileID: 3976947838579778898}
+  _rowboat: {fileID: 3747141280413476372}
 --- !u!1 &3747141280657038370
 GameObject:
   m_ObjectHideFlags: 0
@@ -377,7 +416,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _driveSequence:
-  - {fileID: 21300000, guid: 20b3d5bd79a2c4b84a861f78a83960a2, type: 3}
+  - {fileID: 21300000, guid: a487d70bb2ab54f0da0af27aad9d86ef, type: 3}
   - {fileID: 21300000, guid: 9c079381853e84a8dbd46f4f03751e4c, type: 3}
   - {fileID: 21300000, guid: 7c7ab9d3f88da493eb1e6a22c1b1a7a3, type: 3}
   - {fileID: 21300000, guid: 70fe2c876c240451fac11d5e7941653b, type: 3}
@@ -393,12 +432,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 3e9f816bf58414e6fba30da68b92abcb, type: 3}
   - {fileID: 21300000, guid: cce5f59aeb46f426e93cb4069b8a1497, type: 3}
   _recoverySequence:
-  - {fileID: 21300000, guid: 39d3710722bf94f9c9ec282fc1f33824, type: 3}
-  - {fileID: 21300000, guid: 2122a53585bf243a6869d0c7b975ee6c, type: 3}
-  - {fileID: 21300000, guid: 52977788ace7d4785ac13bbbc55070b1, type: 3}
-  - {fileID: 21300000, guid: 713817925896c468d9d1e32866bed913, type: 3}
-  - {fileID: 21300000, guid: 8b59e7ec09654425e8e76b0a2a2ed591, type: 3}
-  - {fileID: 21300000, guid: 9763d1b0bd83a4a07bb0842b94f644b8, type: 3}
+  - {fileID: 21300000, guid: 2640c6b721797478d9760fc23d531724, type: 3}
+  - {fileID: 21300000, guid: 09e9f65f9235e4ab385050ad0b4420e8, type: 3}
+  - {fileID: 21300000, guid: be22f7959e8304c87b0a2edf12ad74df, type: 3}
+  - {fileID: 21300000, guid: 79cc3c3a01ee0461fa0a22f614d9d49f, type: 3}
+  - {fileID: 21300000, guid: 5ac79fd8d6ac84fca9f2c3278aa4b7a6, type: 3}
+  - {fileID: 21300000, guid: 385825df366e44785b204b5d2643ce26, type: 3}
   - {fileID: 21300000, guid: 7f14e4e9b084a43e8989f410c7fe7989, type: 3}
   - {fileID: 21300000, guid: ecc2fcd9c405a4e99b7c622930333b5a, type: 3}
   - {fileID: 21300000, guid: 88f38b30c36144f2c978c7942cb7053b, type: 3}
@@ -421,6 +460,6 @@ MonoBehaviour:
   _velocity: 1
   _playerController: {fileID: 3747141279918311454}
   _maximumSpeed: 3
-  _delayTime: 0.2
+  _rowboatParamsProvider: {fileID: 3976947838579778898}
   _rowboat: {fileID: 3747141280413476372}
   _isEmpty: 0
