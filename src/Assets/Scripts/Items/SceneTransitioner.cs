@@ -31,6 +31,7 @@ public class SceneTransitioner : Interactable
             }
             else 
             {
+                _hasNotRunYet = true;
                 _dialogueTrigger.TriggerDialogue();
             }
         }

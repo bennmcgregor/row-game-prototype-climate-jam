@@ -33,7 +33,7 @@ public class CutsceneController : MonoBehaviour
         // start asynchronously loading the next scene
         if (_loadMainMenuNext)
         {
-            _sceneLoader.LoadNextScene();
+            _sceneLoader.LoadMenuScene();
         }
         else if (_sceneLoader != null)
         {
